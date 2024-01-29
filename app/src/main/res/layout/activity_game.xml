@@ -4,24 +4,50 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <Chronometer
-        android:id="@+id/timerClock"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentTop="true"
-        android:padding="16dp"
-        android:textSize="16sp"
-        android:format="%s"/>
+   <LinearLayout
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:orientation="horizontal">
 
-    <!-- Question Text -->
+       <TextView
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:layout_marginLeft="@dimen/view_horizontal_margin"
+           android:layout_marginTop="@dimen/view_horizontal_margin"
+           android:layout_marginBottom="@dimen/view_horizontal_margin"
+           android:padding="@dimen/view_vertical_margin"
+           android:text="SCORE :" />
+
+       <TextView
+           android:id="@+id/score"
+           android:layout_width="100dp"
+           android:layout_height="wrap_content"
+           android:padding="@dimen/view_vertical_margin"
+           android:layout_marginRight="@dimen/view_horizontal_margin"
+           android:layout_marginTop="@dimen/view_horizontal_margin"
+           android:layout_marginBottom="@dimen/view_horizontal_margin"
+
+           />
+
+       <Chronometer
+           android:id="@+id/timerClock"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:padding="@dimen/view_vertical_margin"
+           android:layout_marginTop="@dimen/view_horizontal_margin"
+           android:layout_marginLeft="100dp"
+           android:format="%s"
+           android:textSize="16sp" />
+
+   </LinearLayout>
+
     <TextView
         android:id="@+id/questionText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Type your text here..."
-
         android:inputType="textMultiLine"
+        android:layout_margin="@dimen/view_horizontal_margin"
         android:lines="5"
         android:textSize="18sp"
         android:padding="16dp"/>
@@ -64,6 +90,15 @@
             android:layout_height="wrap_content"
             android:text="Option 5"/>
     </RadioGroup>
+    <Button
+        android:id="@+id/submit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="SUBMIT"
+        android:layout_marginTop="40dp"
+        android:layout_gravity="center_horizontal"
+        />
+
 
 
 

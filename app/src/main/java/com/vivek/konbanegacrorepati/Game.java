@@ -2,9 +2,12 @@ package com.vivek.konbanegacrorepati;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.SystemClock;
+import android.view.View;
+import android.widget.Button;
 import android.widget.Chronometer;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -22,10 +25,13 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class Game extends AppCompatActivity {
     List<Question> allQuestions = new ArrayList<>();
+    int Score;
     Chronometer timerClock;
-    TextView questionText;
+    CountDownTimer countDownTimer;
+    TextView questionText,score;
     RadioGroup optionsRadioGroup;
     RadioButton option1, option2, option3, option4,option5;
+    Button submit;
     int currentIndex=0;
     long baseTime = System.currentTimeMillis();
     @Override
@@ -38,14 +44,14 @@ public class Game extends AppCompatActivity {
 
 
 
-
     }
 
-
+    //setting all the questions one by one to the xml and adding any functions
     private void displayTheQuestions() {
         if (currentIndex < allQuestions.size()) {
             Question currentQuestion = allQuestions.get(currentIndex);
 
+            optionsRadioGroup.clearCheck();
             questionText.setText(currentQuestion.getQuestion());
             option1.setText(currentQuestion.getOptionA());
             option2.setText(currentQuestion.getOptionB());
@@ -59,18 +65,41 @@ public class Game extends AppCompatActivity {
             timerClock.setBase(baseTime);
             timerClock.start();
 
-            // Schedule to display the next question after the specified time
-            new CountDownTimer(questionTime, 1000) {
+
+
+
+
+            // update  time to  display the next question after the specified time
+            countDownTimer =new CountDownTimer(questionTime, 1000) {
                 public void onTick(long millisUntilFinished) {
                     // Update the timer with the remaining time
                     long elapsedTime = System.currentTimeMillis() - baseTime;
                     timerClock.setBase(SystemClock.elapsedRealtime() - elapsedTime);
+                    submit.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            if(currentIndex==allQuestions.size()-1)
+                                {
+                                    startActivity(new Intent(getApplicationContext(), Result.class));
+                                }
+                            else
+                                {
+                                    onFinish();
+                                    cancel();
+                                }
+                        }
+                    });
                 }
 
                 public void onFinish() {
                     // Move to the next question after the timer finishes
+                    if(currentIndex==allQuestions.size()-1)
+                    {
+                        startActivity(new Intent(getApplicationContext(), Result.class));
+                    }
                     timerClock.stop();
                     currentIndex++;
+
                     displayTheQuestions();
                 }
             }.start();
@@ -78,7 +107,7 @@ public class Game extends AppCompatActivity {
     }
 
 
-
+    //method finds the all the ids from Xml file
     private void findid() {
         timerClock = findViewById(R.id.timerClock);
         questionText = findViewById(R.id.questionText);
@@ -88,8 +117,13 @@ public class Game extends AppCompatActivity {
         option3 = findViewById(R.id.option3);
         option4 = findViewById(R.id.option4);
         option5 = findViewById(R.id.option5);
+        score=findViewById(R.id.score);
+        submit=findViewById(R.id.submit);
     }
 
+
+
+    //geting the all the question from database from questiontable
     private void getTheData() {
 
         Retrofit retrofit = new Retrofit.Builder()
@@ -110,8 +144,6 @@ public class Game extends AppCompatActivity {
 
                     setting(questions);
                     displayTheQuestions();
-
-
                 }
             }
 
