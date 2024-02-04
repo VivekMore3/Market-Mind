@@ -38,8 +38,64 @@ public class AdminPage extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_page);
+
+        //getting all the ids
         findId();
 
+
+        //getting the correct option
+        option.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                // Get the selected radio button from the group using checkedId
+                if(optionA.isChecked()){
+                    t_correctAns='a';
+                }
+                if(optionB.isChecked()){
+                    t_correctAns='b';
+                }
+                if(optionC.isChecked()){
+                    t_correctAns='c';
+                }
+                if(optionD.isChecked()){
+                    t_correctAns='d';
+                }
+                if(optionE.isChecked()){
+                    t_correctAns='e';
+                }
+
+            }
+        });
+
+
+
+        //getting the complexity
+        complexity.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                // Get the selected radio button from the group using checkedId
+                if(c01.isChecked()){
+                    t_complexity=1;
+                }
+                if(c02.isChecked()){
+                    t_complexity=2;
+                }
+                if(c03.isChecked()){
+                    t_complexity=3;
+                }
+                if(c04.isChecked()){
+                    t_complexity=4;
+                }
+                if(c05.isChecked()){
+                    t_complexity=5;
+                }
+
+            }
+        });
+
+
+
+        //clearing all the fields
         reset.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -53,7 +109,7 @@ public class AdminPage extends AppCompatActivity {
                 gettext();
 
                 Retrofit retrofit=new Retrofit.Builder()
-                        .baseUrl("http://192.168.0.103/php%20api/KBC/")
+                        .baseUrl("http://192.168.0.101/php%20api/KBC/")
                         .addConverterFactory(GsonConverterFactory.create())
                         .build();
 
@@ -112,56 +168,15 @@ public class AdminPage extends AppCompatActivity {
 
     private void gettext() {
         t_question=question.getText().toString();
+
         t_optionA=optionA_txt.getText().toString();
         t_optionB=optionB_txt.getText().toString();
         t_optionC=optionC_txt.getText().toString();
         t_optionD=optionD_txt.getText().toString();
         t_optionE=optionE_txt.getText().toString();
-        option.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(RadioGroup group, int checkedId) {
-                // Get the selected radio button from the group using checkedId
-                if(checkedId==optionA.getId()){
-                    t_correctAns='a';
-                }
-                if(checkedId==optionB.getId()){
-                    t_correctAns='b';
-                }
-                if(checkedId==optionC.getId()){
-                    t_correctAns='c';
-                }
-                if(checkedId==optionD.getId()){
-                    t_correctAns='d';
-                }
-                if(checkedId==optionE.getId()){
-                    t_correctAns='e';
-                }
 
-            }
-        });
 
-        complexity.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(RadioGroup group, int checkedId) {
-                // Get the selected radio button from the group using checkedId
-                if(checkedId==c01.getId()){
-                    t_complexity=1;
-                }
-                if(checkedId==c02.getId()){
-                    t_complexity=2;
-                }
-                if(checkedId==c03.getId()){
-                    t_complexity=3;
-                }
-                if(checkedId==c04.getId()){
-                    t_complexity=4;
-                }
-                if(checkedId==c05.getId()){
-                    t_complexity=5;
-                }
 
-            }
-        });
         t_time=Integer.parseInt(time.getText().toString());
 
     }

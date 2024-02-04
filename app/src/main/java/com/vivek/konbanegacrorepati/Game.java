@@ -24,12 +24,16 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class Game extends AppCompatActivity {
+
+    Intent intent;
     List<Question> allQuestions = new ArrayList<>();
-    int Score;
+    int Score=0;
+
+    String playerAnswer;
     Chronometer timerClock;
     CountDownTimer countDownTimer;
     TextView questionText,score;
-    RadioGroup optionsRadioGroup;
+    RadioGroup options;
     RadioButton option1, option2, option3, option4,option5;
     Button submit;
     int currentIndex=0;
@@ -41,6 +45,29 @@ public class Game extends AppCompatActivity {
 
         findid();
         getTheData();
+        intent=new Intent(this, Result.class);
+        options.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                // Get the selected radio button from the group using checkedId
+                if(option1.isChecked()){
+                    playerAnswer="a";
+                }
+                if(option2.isChecked()){
+                    playerAnswer="b";
+                }
+                if(option3.isChecked()){
+                    playerAnswer="c";
+                }
+                if(option4.isChecked()){
+                    playerAnswer="d";
+                }
+                if(option5.isChecked()){
+                    playerAnswer="e";
+                }
+
+            }
+        });
 
 
 
@@ -51,7 +78,7 @@ public class Game extends AppCompatActivity {
         if (currentIndex < allQuestions.size()) {
             Question currentQuestion = allQuestions.get(currentIndex);
 
-            optionsRadioGroup.clearCheck();
+            options.clearCheck();
             questionText.setText(currentQuestion.getQuestion());
             option1.setText(currentQuestion.getOptionA());
             option2.setText(currentQuestion.getOptionB());
@@ -78,9 +105,16 @@ public class Game extends AppCompatActivity {
                     submit.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
+                            //Toast.makeText(getApplicationContext(),"currentQuestion.getCorrectAns() ="+currentQuestion.getCorrectAns()+"---"+"playerAnswer = "+playerAnswer,Toast.LENGTH_SHORT).show();
+                            //setting the score
+                            if(currentQuestion.getCorrectAns().equals(playerAnswer)){
+                                Score=Score+10;
+                                Toast.makeText(getApplicationContext(),String.valueOf(Score),Toast.LENGTH_SHORT).show();
+                            }
                             if(currentIndex==allQuestions.size()-1)
-                                {
-                                    startActivity(new Intent(getApplicationContext(), Result.class));
+                                {   cancel();
+                                    intent.putExtra("Score",String.valueOf(Score));
+                                    startActivity(intent);
                                 }
                             else
                                 {
@@ -92,14 +126,17 @@ public class Game extends AppCompatActivity {
                 }
 
                 public void onFinish() {
-                    // Move to the next question after the timer finishes
+
+
+                    //moving to the result page
                     if(currentIndex==allQuestions.size()-1)
                     {
-                        startActivity(new Intent(getApplicationContext(), Result.class));
+                        intent.putExtra("Score",String.valueOf(Score));
+                        startActivity(intent);
                     }
                     timerClock.stop();
                     currentIndex++;
-
+                    // Move to the next question after the timer finishes
                     displayTheQuestions();
                 }
             }.start();
@@ -111,7 +148,7 @@ public class Game extends AppCompatActivity {
     private void findid() {
         timerClock = findViewById(R.id.timerClock);
         questionText = findViewById(R.id.questionText);
-        optionsRadioGroup = findViewById(R.id.optionsRadioGroup);
+        options = findViewById(R.id.optionsRadioGroup);
         option1 = findViewById(R.id.option1);
         option2 = findViewById(R.id.option2);
         option3 = findViewById(R.id.option3);
@@ -127,7 +164,7 @@ public class Game extends AppCompatActivity {
     private void getTheData() {
 
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("http://192.168.0.103/php%20api/KBC/")
+                .baseUrl("http://192.168.0.101/php%20api/KBC/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 

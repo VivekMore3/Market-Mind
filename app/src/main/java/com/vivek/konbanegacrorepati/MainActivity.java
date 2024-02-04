@@ -7,8 +7,11 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
+
+    TextView signUp;
     EditText mobileNumber;
     EditText password;
     Button login;
@@ -34,6 +37,13 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        signUp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this,Register.class));
+            }
+        });
+
     }
 
     private void gettext() {
@@ -45,5 +55,6 @@ public class MainActivity extends AppCompatActivity {
         mobileNumber=findViewById(R.id.editTextMobileNumber);
         password=findViewById(R.id.editTextPassword);
         login=findViewById(R.id.buttonLogin);
+        signUp=findViewById(R.id.signUp);
     }
 }
