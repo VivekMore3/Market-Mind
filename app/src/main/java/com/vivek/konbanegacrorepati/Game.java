@@ -164,7 +164,7 @@ public class Game extends AppCompatActivity {
     private void getTheData() {
 
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("http://192.168.0.101/php%20api/KBC/")
+                .baseUrl("http://192.168.0.103/php%20api/KBC/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 

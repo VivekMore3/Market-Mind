@@ -18,8 +18,8 @@ public class Result extends AppCompatActivity {
         setContentView(R.layout.activity_result);
         findId();
         intent=getIntent();
-       // score=Integer.parseInt(intent.getStringExtra("Score"));
-        result.setText(score);
+       score=Integer.parseInt(intent.getStringExtra("Score"));
+        result.setText(String.valueOf(score));
 
 
     }
