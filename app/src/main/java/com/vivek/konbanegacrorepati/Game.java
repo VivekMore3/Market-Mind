@@ -39,7 +39,8 @@ public class Game extends AppCompatActivity {
     TextView questionText,score;
     RadioGroup options;
     RadioButton option1, option2, option3, option4,option5;
-    Button submit;
+    Button submit,pause;
+    boolean timerStop=false;
     int currentIndex=0;
     long baseTime = System.currentTimeMillis();
     @Override
@@ -74,10 +75,25 @@ public class Game extends AppCompatActivity {
             }
         });
 
-
+        pause.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                go(timerStop);
+            }
+        });
 
     }
+    public void go(boolean bool){
+        if(bool==true){
+            timerClock.start();
+            timerStop=false;
+        }
+        if(bool==false){
+            timerClock.stop();
+            timerStop=true;
+        }
 
+    }
     //setting all the questions one by one to the xml and adding any functions
     private void displayTheQuestions() {
         if (currentIndex < allQuestions.size()) {
@@ -95,7 +111,7 @@ public class Game extends AppCompatActivity {
             int questionTime = Integer.parseInt(currentQuestion.getTime()) * 1000; // Convert seconds to milliseconds
             long baseTime = System.currentTimeMillis()+questionTime;
             timerClock.setBase(baseTime);
-            timerClock.start();
+            go(true);
 
 
 
@@ -262,6 +278,7 @@ public class Game extends AppCompatActivity {
         option5 = findViewById(R.id.option5);
         score=findViewById(R.id.score);
         submit=findViewById(R.id.submit);
+        pause=findViewById(R.id.stop);
     }
 
     private void getTheData() {

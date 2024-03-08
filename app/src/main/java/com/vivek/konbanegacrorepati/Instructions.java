@@ -27,10 +27,11 @@ public class Instructions extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_instruction);
         findId();
+        getData();
         startTheGame.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                getData();
+
 
                 intent=new Intent(Instructions.this, Game.class);
 

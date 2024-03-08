@@ -9,14 +9,15 @@
        android:layout_height="wrap_content"
        android:orientation="horizontal">
 
-       <TextView
+       <Button
+           android:id="@+id/stop"
            android:layout_width="wrap_content"
            android:layout_height="wrap_content"
            android:layout_marginLeft="@dimen/view_horizontal_margin"
            android:layout_marginTop="@dimen/view_horizontal_margin"
            android:layout_marginBottom="@dimen/view_horizontal_margin"
            android:padding="@dimen/view_vertical_margin"
-           android:text="SCORE :" />
+           android:text=" stop" />
 
        <TextView
            android:id="@+id/score"

@@ -40,6 +40,7 @@ public class MainActivity extends AppCompatActivity {
 
                 }
                 else if(userId>0){
+
                     intent=new Intent(MainActivity.this, Instructions.class);
                     QuestionNumber.userId=userId;
                     startActivity(intent);
