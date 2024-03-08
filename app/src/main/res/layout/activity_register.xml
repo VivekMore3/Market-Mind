@@ -2,18 +2,27 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:layout_margin="@dimen/view_horizontal_margin"
+    android:orientation="vertical"
     android:padding="16dp">
 
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Win big!"
+        android:layout_gravity="center"
+        android:textSize="60dp"
+        />
     <!-- First Name and Last Name -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/view_horizontal_margin"
         android:orientation="horizontal">
 
         <EditText
-            android:id="@+id/editTextFirstName"
+            android:id="@+id/firstName"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -21,7 +30,7 @@
             android:inputType="textPersonName" />
 
         <EditText
-            android:id="@+id/editTextLastName"
+            android:id="@+id/lastName"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -32,51 +41,77 @@
 
     <!-- Mobile Number -->
     <EditText
-        android:id="@+id/editTextMobileNumber"
+        android:id="@+id/mobileNumber"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/view_horizontal_margin"
         android:hint="Mobile Number"
         android:inputType="phone" />
 
     <!-- Email -->
     <EditText
-        android:id="@+id/editTextEmail"
+        android:id="@+id/email"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Email"
+        android:layout_marginTop="@dimen/view_horizontal_margin"
+        android:hint="email"
         android:inputType="textEmailAddress" />
 
     <!-- Age -->
     <EditText
-        android:id="@+id/editTextAge"
+        android:id="@+id/age"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Age"
+        android:layout_marginTop="@dimen/view_horizontal_margin"
+        android:hint="age"
         android:inputType="number" />
 
     <!-- Gender -->
-    <Spinner
-        android:id="@+id/spinnerGender"
-        android:layout_width="match_parent"
+    <RadioGroup
+        android:id="@+id/Gender"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:prompt="@string/gender_prompt"
-        android:entries="@array/gender_array" />
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Gender" />
+
+        <RadioButton
+            android:id="@+id/Male"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Male" />
+
+        <RadioButton
+            android:id="@+id/Female"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Female" />
+
+        <RadioButton
+            android:id="@+id/Other"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Other" />
+    </RadioGroup>
 
     <!-- Area -->
     <EditText
-        android:id="@+id/editTextArea"
+        android:id="@+id/password"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Area"
-        android:inputType="text" />
+        android:hint="password"
+        android:inputType="textPassword" />
 
     <!-- Button to Submit Registration -->
     <Button
-        android:id="@+id/buttonSubmitRegistration"
+        android:id="@+id/Submit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Submit Registration"
+        android:layout_gravity="center"
         android:layout_marginTop="16dp"
-        android:layout_gravity="center" />
+        android:text="Register" />
 
 </LinearLayout>

@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.SystemClock;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Chronometer;
@@ -13,6 +14,9 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,10 +30,10 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class Game extends AppCompatActivity {
 
     Intent intent;
-    List<Question> allQuestions = new ArrayList<>();
+    List<ComplexityWiseQuestion> allQuestions = new ArrayList<>();
     int Score=0;
 
-    String playerAnswer;
+    String playerAnswer=null;
     Chronometer timerClock;
     CountDownTimer countDownTimer;
     TextView questionText,score;
@@ -66,6 +70,7 @@ public class Game extends AppCompatActivity {
                     playerAnswer="e";
                 }
 
+
             }
         });
 
@@ -76,8 +81,8 @@ public class Game extends AppCompatActivity {
     //setting all the questions one by one to the xml and adding any functions
     private void displayTheQuestions() {
         if (currentIndex < allQuestions.size()) {
-            Question currentQuestion = allQuestions.get(currentIndex);
-
+            ComplexityWiseQuestion currentQuestion = allQuestions.get(currentIndex);
+            checkQuestion(currentIndex);
             options.clearCheck();
             questionText.setText(currentQuestion.getQuestion());
             option1.setText(currentQuestion.getOptionA());
@@ -107,14 +112,29 @@ public class Game extends AppCompatActivity {
                         public void onClick(View v) {
                             //Toast.makeText(getApplicationContext(),"currentQuestion.getCorrectAns() ="+currentQuestion.getCorrectAns()+"---"+"playerAnswer = "+playerAnswer,Toast.LENGTH_SHORT).show();
                             //setting the score
+
+                            if(playerAnswer==null){
+                                currentIndex=allQuestions.size()-1;
+                            }
                             if(currentQuestion.getCorrectAns().equals(playerAnswer)){
+                                Toast.makeText(getApplicationContext(),playerAnswer,Toast.LENGTH_SHORT).show();
+
                                 Score=Score+10;
                                 Toast.makeText(getApplicationContext(),String.valueOf(Score),Toast.LENGTH_SHORT).show();
                             }
+                            else{
+                                currentIndex=allQuestions.size()-1;
+                               onFinish();
+
+                            }
+
+
                             if(currentIndex==allQuestions.size()-1)
                                 {   cancel();
                                     intent.putExtra("Score",String.valueOf(Score));
+                                    intent.putExtra("current index",currentIndex);
                                     startActivity(intent);
+                                    finish();
                                 }
                             else
                                 {
@@ -127,20 +147,106 @@ public class Game extends AppCompatActivity {
 
                 public void onFinish() {
 
+                    if(playerAnswer==null){
 
+
+                        intent.putExtra("message","OOps!! Time up For the Question");
+                        currentIndex=allQuestions.size()-1;
+
+                    }
                     //moving to the result page
                     if(currentIndex==allQuestions.size()-1)
                     {
+                        setQuestion();
                         intent.putExtra("Score",String.valueOf(Score));
                         startActivity(intent);
+                        finish();
                     }
                     timerClock.stop();
                     currentIndex++;
                     // Move to the next question after the timer finishes
+                    playerAnswer=null;
                     displayTheQuestions();
                 }
             }.start();
         }
+    }
+
+    private void setQuestion() {
+        Retrofit retrofit=new Retrofit.Builder()
+                .baseUrl("http://"+IpAddress.ipAddress+"/php%20api/KBC/")
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        ApiService apiService=retrofit.create(ApiService.class);
+        Call<ResponseAdmin> settingQuestion=apiService.SettingQuestion
+                (QuestionNumber.userId,QuestionNumber.complexity1Qno,QuestionNumber.complexity2Qno
+                        ,QuestionNumber.complexity3Qno,QuestionNumber.complexity4Qno,QuestionNumber.complexity5Qno);
+        settingQuestion.enqueue(new Callback<ResponseAdmin>() {
+            @Override
+            public void onResponse(Call<ResponseAdmin> call, Response<ResponseAdmin> response) {
+                ResponseAdmin responseRegistration=response.body();
+                String success=responseRegistration.getSuccess();
+                String message= responseRegistration.getMessage();
+
+                Toast.makeText(getApplicationContext(),"success : "+success+"message  :"+message
+                        ,Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onFailure(Call<ResponseAdmin> call, Throwable t) {
+
+                String errorMessage = t.getMessage();
+
+                // If the message is null, display a generic error message
+                if (errorMessage == null) {
+                    errorMessage = "Request failed";
+                }
+
+                // Display the error message in a Toast
+                Toast.makeText(getApplicationContext(), "Failed: " + errorMessage, Toast.LENGTH_SHORT).show();
+
+            }
+        });
+    }
+
+
+    private void checkQuestion(int currentIndex) {
+        switch (currentIndex){
+            case 0:QuestionNumber.complexity1Qno++;
+                Log.d("complexity1Qno", String.valueOf(QuestionNumber.complexity1Qno));
+            break;
+            case 1:QuestionNumber.complexity1Qno++;
+                Log.d("complexity1Qno", String.valueOf(QuestionNumber.complexity1Qno));
+                break;
+            case 2:QuestionNumber.complexity2Qno++;
+                Log.d("complexity2Qno", String.valueOf(QuestionNumber.complexity2Qno));
+                break;
+            case 3:QuestionNumber.complexity2Qno++;
+                Log.d("complexity2Qno", String.valueOf(QuestionNumber.complexity2Qno));
+                break;
+            case 4:QuestionNumber.complexity3Qno++;
+                Log.d("complexity3Qno", String.valueOf(QuestionNumber.complexity3Qno));
+                break;
+            case 5:QuestionNumber.complexity3Qno++;
+                Log.d("complexity3Qno", String.valueOf(QuestionNumber.complexity3Qno));
+                break;
+            case 6:QuestionNumber.complexity4Qno++;
+                Log.d("complexity4Qno", String.valueOf(QuestionNumber.complexity4Qno));
+                break;
+            case 7:QuestionNumber.complexity4Qno++;
+                Log.d("complexity4Qno", String.valueOf(QuestionNumber.complexity4Qno));
+                break;
+            case 8:QuestionNumber.complexity5Qno++;
+                Log.d("complexity5Qno", String.valueOf(QuestionNumber.complexity5Qno));
+                break;
+            case 9:QuestionNumber.complexity5Qno++;
+                Log.d("complexity5Qno", String.valueOf(QuestionNumber.complexity5Qno));
+                break;
+
+
+        }
+
     }
 
 
@@ -158,13 +264,51 @@ public class Game extends AppCompatActivity {
         submit=findViewById(R.id.submit);
     }
 
+    private void getTheData() {
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl("http://"+IpAddress.ipAddress+"/php%20api/KBC/")
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        ApiService apiService = retrofit.create(ApiService.class);
+        Call<List<ComplexityWiseQuestion>> getAllQuestions = apiService.GetAllQuestions(QuestionNumber.userId,QuestionNumber.complexity1Qno,QuestionNumber.complexity2Qno,
+                                QuestionNumber.complexity3Qno,QuestionNumber.complexity4Qno,QuestionNumber.complexity5Qno);
+
+        getAllQuestions.enqueue(new Callback<List<ComplexityWiseQuestion>>()  {
+            @Override
+            public void onResponse(Call<List<ComplexityWiseQuestion>> call, Response<List<ComplexityWiseQuestion>> response) {
+               // Log.d("response", response);
+                if (response.isSuccessful()) {
+
+                    List<ComplexityWiseQuestion> questions = response.body();
 
 
+                    setting(questions);
+                    displayTheQuestions();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<ComplexityWiseQuestion>> call, Throwable t) {
+                Toast.makeText(getApplicationContext(),"failed",Toast.LENGTH_SHORT).show();
+
+                Toast.makeText(getApplicationContext(),t.getMessage(),Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    private void setting(List<ComplexityWiseQuestion> questions) {
+
+        allQuestions.addAll(questions);
+    }
+}
+
+ /*
     //geting the all the question from database from questiontable
     private void getTheData() {
 
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("http://192.168.0.103/php%20api/KBC/")
+                .baseUrl("http://"+IpAddress.ipAddress+"/php%20api/KBC/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
@@ -191,9 +335,4 @@ public class Game extends AppCompatActivity {
         });
 
     }
-
-    private void setting(List<Question> questions) {
-
-        allQuestions.addAll(questions);
-    }
-}
+*/

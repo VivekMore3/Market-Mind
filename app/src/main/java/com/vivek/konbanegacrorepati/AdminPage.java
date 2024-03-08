@@ -2,7 +2,9 @@ package com.vivek.konbanegacrorepati;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -28,7 +30,8 @@ public class AdminPage extends AppCompatActivity {
     RadioGroup complexity;
     RadioButton c01,c02,c03,c04,c05;
     EditText time;
-    Button submit;
+    Button submit,product;
+
 
     String t_question,t_optionA,t_optionB,t_optionC,t_optionD,t_optionE;
     char t_correctAns;
@@ -109,13 +112,169 @@ public class AdminPage extends AppCompatActivity {
                 gettext();
 
                 Retrofit retrofit=new Retrofit.Builder()
-                        .baseUrl("http://192.168.0.103/php%20api/KBC/")
+                        .baseUrl("http://"+IpAddress.ipAddress+"/php%20api/KBC/")
                         .addConverterFactory(GsonConverterFactory.create())
                         .build();
 
                 ApiService apiService=retrofit.create(ApiService.class);
 
-                Call<ResponseAdmin> admin=apiService.Admin
+                if(t_complexity==1){
+                    Call<ResponseAdmin> complexity1=apiService.Complexity1
+                            (t_question,t_optionA,t_optionB
+                                    ,t_optionC,t_optionD,t_optionE,t_correctAns,t_time);
+                    complexity1.enqueue(new Callback<ResponseAdmin>() {
+                        @Override
+                        public void onResponse(Call<ResponseAdmin> call, Response<ResponseAdmin> response) {
+                            ResponseAdmin responseRegistration=response.body();
+                            String success=responseRegistration.getSuccess();
+                            String message= responseRegistration.getMessage();
+
+                            Toast.makeText(getApplicationContext(),"success : "+success+"message  :"+message
+                                    ,Toast.LENGTH_SHORT).show();
+                        }
+
+                        @Override
+                        public void onFailure(Call<ResponseAdmin> call, Throwable t) {
+
+                            String errorMessage = t.getMessage();
+
+                            // If the message is null, display a generic error message
+                            if (errorMessage == null) {
+                                errorMessage = "Request failed";
+                            }
+
+                            // Display the error message in a Toast
+                            Toast.makeText(getApplicationContext(), "Failed: " + errorMessage, Toast.LENGTH_SHORT).show();
+
+                        }
+                    });
+                }
+
+                else if(t_complexity==2){
+                    Call<ResponseAdmin> complexity2=apiService.Complexity2
+                            (t_question,t_optionA,t_optionB
+                                    ,t_optionC,t_optionD,t_optionE,t_correctAns,t_time);
+                    complexity2.enqueue(new Callback<ResponseAdmin>() {
+                        @Override
+                        public void onResponse(Call<ResponseAdmin> call, Response<ResponseAdmin> response) {
+                            ResponseAdmin responseRegistration=response.body();
+                            String success=responseRegistration.getSuccess();
+                            String message= responseRegistration.getMessage();
+
+                            Toast.makeText(getApplicationContext(),"success : "+success+"message  :"+message
+                                    ,Toast.LENGTH_SHORT).show();
+                        }
+
+                        @Override
+                        public void onFailure(Call<ResponseAdmin> call, Throwable t) {
+
+                            String errorMessage = t.getMessage();
+
+                            // If the message is null, display a generic error message
+                            if (errorMessage == null) {
+                                errorMessage = "Request failed";
+                            }
+
+                            // Display the error message in a Toast
+                            Toast.makeText(getApplicationContext(), "Failed: " + errorMessage, Toast.LENGTH_SHORT).show();
+
+                        }
+                    });
+                }
+                else if(t_complexity==3){
+                    Call<ResponseAdmin> complexity3=apiService.Complexity3
+                            (t_question,t_optionA,t_optionB
+                                    ,t_optionC,t_optionD,t_optionE,t_correctAns,t_time);
+                    complexity3.enqueue(new Callback<ResponseAdmin>() {
+                        @Override
+                        public void onResponse(Call<ResponseAdmin> call, Response<ResponseAdmin> response) {
+                            ResponseAdmin responseRegistration=response.body();
+                            String success=responseRegistration.getSuccess();
+                            String message= responseRegistration.getMessage();
+
+                            Toast.makeText(getApplicationContext(),"success : "+success+"message  :"+message
+                                    ,Toast.LENGTH_SHORT).show();
+                        }
+
+                        @Override
+                        public void onFailure(Call<ResponseAdmin> call, Throwable t) {
+
+                            String errorMessage = t.getMessage();
+
+                            // If the message is null, display a generic error message
+                            if (errorMessage == null) {
+                                errorMessage = "Request failed";
+                            }
+
+                            // Display the error message in a Toast
+                            Toast.makeText(getApplicationContext(), "Failed: " + errorMessage, Toast.LENGTH_SHORT).show();
+
+                        }
+                    });
+                }
+                else if(t_complexity==4){
+                    Call<ResponseAdmin> complexity4=apiService.Complexity4
+                            (t_question,t_optionA,t_optionB
+                                    ,t_optionC,t_optionD,t_optionE,t_correctAns,t_time);
+                    complexity4.enqueue(new Callback<ResponseAdmin>() {
+                        @Override
+                        public void onResponse(Call<ResponseAdmin> call, Response<ResponseAdmin> response) {
+                            ResponseAdmin responseRegistration=response.body();
+                            String success=responseRegistration.getSuccess();
+                            String message= responseRegistration.getMessage();
+
+                            Toast.makeText(getApplicationContext(),"success : "+success+"message  :"+message
+                                    ,Toast.LENGTH_SHORT).show();
+                        }
+
+                        @Override
+                        public void onFailure(Call<ResponseAdmin> call, Throwable t) {
+
+                            String errorMessage = t.getMessage();
+
+                            // If the message is null, display a generic error message
+                            if (errorMessage == null) {
+                                errorMessage = "Request failed";
+                            }
+
+                            // Display the error message in a Toast
+                            Toast.makeText(getApplicationContext(), "Failed: " + errorMessage, Toast.LENGTH_SHORT).show();
+
+                        }
+                    });
+                }
+                else if(t_complexity==5){
+                    Call<ResponseAdmin> complexity5=apiService.Complexity5
+                            (t_question,t_optionA,t_optionB
+                                    ,t_optionC,t_optionD,t_optionE,t_correctAns,t_time);
+                    complexity5.enqueue(new Callback<ResponseAdmin>() {
+                        @Override
+                        public void onResponse(Call<ResponseAdmin> call, Response<ResponseAdmin> response) {
+                            ResponseAdmin responseRegistration=response.body();
+                            String success=responseRegistration.getSuccess();
+                            String message= responseRegistration.getMessage();
+
+                            Toast.makeText(getApplicationContext(),"success : "+success+"message  :"+message
+                                    ,Toast.LENGTH_SHORT).show();
+                        }
+
+                        @Override
+                        public void onFailure(Call<ResponseAdmin> call, Throwable t) {
+
+                            String errorMessage = t.getMessage();
+
+                            // If the message is null, display a generic error message
+                            if (errorMessage == null) {
+                                errorMessage = "Request failed";
+                            }
+
+                            // Display the error message in a Toast
+                            Toast.makeText(getApplicationContext(), "Failed: " + errorMessage, Toast.LENGTH_SHORT).show();
+
+                        }
+                    });
+                }
+                /*Call<ResponseAdmin> admin=apiService.Admin
                         (t_question,t_optionA,t_optionB
                                 ,t_optionC,t_optionD,t_optionE,t_correctAns,t_complexity,t_time);
                 admin.enqueue(new Callback<ResponseAdmin>() {
@@ -144,11 +303,17 @@ public class AdminPage extends AppCompatActivity {
 
                     }
                 });
+                */
             }
         });
 
 
-
+    product.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            startActivity(new Intent(AdminPage.this,product.class));
+        }
+    });
 
     }
 
@@ -203,5 +368,6 @@ public class AdminPage extends AppCompatActivity {
         c05=findViewById(R.id.c05);
         time=findViewById(R.id.time);
         submit=findViewById(R.id.submit);
+        product=findViewById(R.id.product);
     }
 }
