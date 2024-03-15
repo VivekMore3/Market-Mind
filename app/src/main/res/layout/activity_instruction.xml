@@ -10,7 +10,19 @@
         android:id="@+id/instruction"
         android:layout_width="350dp"
         android:layout_height="600dp"
-        android:layout_margin="30dp"/>
+        android:layout_margin="30dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Rules for the game:\n\n
+    1. The game consists of 10 questions.\n\n
+    2. The complexity of questions increases as you progress.\n\n
+    3. Each question will have a designated time limit within which you must provide your answer and proceed to the next question.\n\n
+    4. If you select your answer but fail to submit it, the game will end for you.\n\n
+    5. Submitting a wrong answer will also result in the termination of your game.\n\n
+    \n\n Keep playing for exciting gifts and discounts."
+            android:textSize="18dp"/>
+    </FrameLayout>
     <Button
         android:id="@+id/proceed"
         android:layout_width="wrap_content"

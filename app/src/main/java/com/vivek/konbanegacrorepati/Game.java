@@ -40,6 +40,8 @@ public class Game extends AppCompatActivity {
     RadioGroup options;
     RadioButton option1, option2, option3, option4,option5;
     Button submit,pause;
+    int checkSumitAfterOptionSelection=0;
+    int checkOnfinish=1;
     boolean timerStop=false;
     int currentIndex=0;
     long baseTime = System.currentTimeMillis();
@@ -128,6 +130,7 @@ public class Game extends AppCompatActivity {
                         public void onClick(View v) {
                             //Toast.makeText(getApplicationContext(),"currentQuestion.getCorrectAns() ="+currentQuestion.getCorrectAns()+"---"+"playerAnswer = "+playerAnswer,Toast.LENGTH_SHORT).show();
                             //setting the score
+                            checkSumitAfterOptionSelection=1;
 
                             if(playerAnswer==null){
                                 currentIndex=allQuestions.size()-1;
@@ -140,7 +143,10 @@ public class Game extends AppCompatActivity {
                             }
                             else{
                                 currentIndex=allQuestions.size()-1;
-                               onFinish();
+                                intent.putExtra("message","OOps !! Wrong Answer ");
+                                onFinish();
+                                cancel();
+                                checkOnfinish=0;
 
                             }
 
@@ -149,13 +155,15 @@ public class Game extends AppCompatActivity {
                                 {   cancel();
                                     intent.putExtra("Score",String.valueOf(Score));
                                     intent.putExtra("current index",currentIndex);
-                                    startActivity(intent);
-                                    finish();
+
                                 }
                             else
                                 {
-                                    onFinish();
-                                    cancel();
+                                    if(checkOnfinish==1){
+                                        onFinish();
+                                        cancel();
+                                    }
+
                                 }
                         }
                     });
@@ -163,19 +171,21 @@ public class Game extends AppCompatActivity {
 
                 public void onFinish() {
 
-                    if(playerAnswer==null){
+                    if(playerAnswer==null||checkSumitAfterOptionSelection==0){
 
 
                         intent.putExtra("message","OOps!! Time up For the Question");
                         currentIndex=allQuestions.size()-1;
 
                     }
+                    checkSumitAfterOptionSelection=0;
                     //moving to the result page
                     if(currentIndex==allQuestions.size()-1)
                     {
                         setQuestion();
                         intent.putExtra("Score",String.valueOf(Score));
                         startActivity(intent);
+                        finish();
                         finish();
                     }
                     timerClock.stop();

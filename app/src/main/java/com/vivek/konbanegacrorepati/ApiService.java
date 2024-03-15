@@ -144,6 +144,13 @@ public interface ApiService {
             @Field("complexity5Qno") int complexity5Qno
     );
 
+    @FormUrlEncoded
+    @POST("db_product.php")
+    Call<ResponseAdmin> ProductInfo(
+            @Field("productCode") String productCode,
+            @Field("productName") String productName
+    );
+
 
 
 

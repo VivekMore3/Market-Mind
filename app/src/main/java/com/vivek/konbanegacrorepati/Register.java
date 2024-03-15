@@ -53,42 +53,10 @@ public class Register extends AppCompatActivity {
             public void onClick(View v) {
                 getText();
 
-                Retrofit retrofit=new Retrofit.Builder()
-                        .baseUrl("http://"+IpAddress.ipAddress+"/php%20api/KBC/")
-                        .addConverterFactory(GsonConverterFactory.create())
-                        .build();
+                if(validateInputs()){
+                    saveDetails();
 
-                ApiService apiService=retrofit.create(ApiService.class);
-
-                Call<ResponseAdmin> user=apiService.User
-                            (TfirstName,TlastName,TmobileNumber
-                                    ,Temail,Tage,Tpassword,1,1,1,1,1);
-                    user.enqueue(new Callback<ResponseAdmin>() {
-                        @Override
-                        public void onResponse(Call<ResponseAdmin> call, Response<ResponseAdmin> response) {
-                            ResponseAdmin responseRegistration=response.body();
-                            String success=responseRegistration.getSuccess();
-                            String message= responseRegistration.getMessage();
-
-                            Toast.makeText(getApplicationContext(),"success : "+success+"message  :"+message
-                                    ,Toast.LENGTH_SHORT).show();
-                        }
-
-                        @Override
-                        public void onFailure(Call<ResponseAdmin> call, Throwable t) {
-
-                            String errorMessage = t.getMessage();
-
-                            // If the message is null, display a generic error message
-                            if (errorMessage == null) {
-                                errorMessage = "Request failed";
-                            }
-
-                            // Display the error message in a Toast
-                            Toast.makeText(getApplicationContext(), "Failed: " + errorMessage, Toast.LENGTH_SHORT).show();
-                            Log.d(TAG, errorMessage);
-                        }
-                    });
+                }
                 }
             });
 
@@ -116,6 +84,121 @@ public class Register extends AppCompatActivity {
         age=findViewById(R.id.age);
         password=findViewById(R.id.password);
         submit=findViewById(R.id.Submit);
+    }
+    private boolean validateInputs() {
+        // Validate First Name
+        String firstNameText = firstName.getText().toString().trim();
+        if (firstNameText.isEmpty()) {
+            firstName.setError("First Name is required");
+            firstName.requestFocus();
+            return false;
+        }
+
+        // Validate Last Name
+        String lastNameText = lastName.getText().toString().trim();
+        if (lastNameText.isEmpty()) {
+            lastName.setError("Last Name is required");
+            lastName.requestFocus();
+            return false;
+        }
+
+        // Validate Mobile Number
+        String mobileNumberText = mobileNumber.getText().toString().trim();
+        if (mobileNumberText.isEmpty()) {
+            mobileNumber.setError("Mobile Number is required");
+            mobileNumber.requestFocus();
+            return false;
+        } else if (!isValidMobileNumber(mobileNumberText)) {
+            mobileNumber.setError("Invalid Mobile Number");
+            mobileNumber.requestFocus();
+            return false;
+        }
+        // Add more validations for mobile number (e.g., length, format) as needed
+
+        // Validate Email
+        String emailText = email.getText().toString().trim();
+        if (emailText.isEmpty()) {
+            email.setError("Email is required");
+            email.requestFocus();
+            return false;
+        }
+        // Add more validations for email (e.g., format) as needed
+
+        // Validate Age
+        String ageText = age.getText().toString().trim();
+        if (ageText.isEmpty()) {
+            age.setError("Age is required");
+            age.requestFocus();
+            return false;
+        }
+        // Add more validations for age (e.g., minimum and maximum age) as needed
+
+        // Validate Password
+        String passwordText = password.getText().toString().trim();
+        if (passwordText.isEmpty()) {
+            password.setError("Password is required");
+            password.requestFocus();
+            return false;
+        }
+        // Add more validations for password (e.g., minimum length, strength) as needed
+
+        // Check Gender selection
+        if (rgGender.getCheckedRadioButtonId() == -1) {
+            // No radio button is checked
+            Toast.makeText(getApplicationContext(), "Please select a gender", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+
+        // All validations passed
+        return true;
+    }
+
+    private boolean isValidMobileNumber(String mobileNumberText) {
+        if (mobileNumber.length() != 10) {
+            return false;
+        }
+        // Validate format (you can add more specific format checks if needed)
+        return true;
+
+    }
+
+    public void saveDetails(){
+        Retrofit retrofit=new Retrofit.Builder()
+                .baseUrl("http://"+IpAddress.ipAddress+"/php%20api/KBC/")
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        ApiService apiService=retrofit.create(ApiService.class);
+
+        Call<ResponseAdmin> user=apiService.User
+                (TfirstName,TlastName,TmobileNumber
+                        ,Temail,Tage,Tpassword,1,1,1,1,1);
+        user.enqueue(new Callback<ResponseAdmin>() {
+            @Override
+            public void onResponse(Call<ResponseAdmin> call, Response<ResponseAdmin> response) {
+                ResponseAdmin responseRegistration=response.body();
+                String success=responseRegistration.getSuccess();
+                String message= responseRegistration.getMessage();
+
+                Toast.makeText(getApplicationContext(),"success : "+success+"message  :"+message
+                        ,Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onFailure(Call<ResponseAdmin> call, Throwable t) {
+
+                String errorMessage = t.getMessage();
+
+                // If the message is null, display a generic error message
+                if (errorMessage == null) {
+                    errorMessage = "Request failed";
+                }
+
+                // Display the error message in a Toast
+                Toast.makeText(getApplicationContext(), "Failed: " + errorMessage, Toast.LENGTH_SHORT).show();
+                Log.d(TAG, errorMessage);
+            }
+        });
     }
     
 }

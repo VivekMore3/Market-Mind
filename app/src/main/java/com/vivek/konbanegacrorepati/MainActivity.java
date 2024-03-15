@@ -35,16 +35,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 gettext();
-                if(txt_mobileNumber.equals("74475")&&txt_password.equals("vivek@123")){
-                    startActivity(new Intent(MainActivity.this,AdminPage.class));
+                getLoginDetail();
 
-                }
-                else if(userId>0){
-
-                    intent=new Intent(MainActivity.this, Instructions.class);
-                    QuestionNumber.userId=userId;
-                    startActivity(intent);
-                }
 
             }
         });
@@ -75,10 +67,19 @@ public class MainActivity extends AppCompatActivity {
                 String success=responseRegistration.getSuccess();
                 String message= responseRegistration.getMessage();
                 userId=responseRegistration.getUserid();
+                if(txt_mobileNumber.equals("74475")&&txt_password.equals("vivek@123")){
+                    startActivity(new Intent(MainActivity.this,AdminPage.class));
+
+                }
+                else if(userId>0){
+
+                    intent=new Intent(MainActivity.this, Instructions.class);
+                    QuestionNumber.userId=userId;
+                    startActivity(intent);
+                }
 
 
-                Toast.makeText(getApplicationContext(),"success : "+success+"message  :"+message+"userId  :"+userId
-                        ,Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(),"success : "+success+"message  :"+message+"userId  :"+userId,Toast.LENGTH_SHORT).show();
 
             }
 
@@ -103,7 +104,7 @@ public class MainActivity extends AppCompatActivity {
     private void gettext() {
         txt_mobileNumber=mobileNumber.getText().toString();
         txt_password=password.getText().toString();
-        getLoginDetail();
+
     }
 
     private void findId() {

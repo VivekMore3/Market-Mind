@@ -10,15 +10,22 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:text="Result"
+        android:text="Game over"
         android:textSize="30dp"
         android:layout_gravity="center"/>
     <TextView
         android:layout_margin="20dp"
+        android:id="@+id/message"
+        android:textSize="30dp"
+        android:layout_width="350dp"
+        android:layout_height="50dp"
+        />
+    <TextView
+        android:layout_margin="20dp"
         android:id="@+id/result"
         android:textSize="30dp"
-        android:layout_width="100dp"
-        android:layout_height="40dp"
+        android:layout_width="350dp"
+        android:layout_height="50dp"
         />
 
 </LinearLayout>
