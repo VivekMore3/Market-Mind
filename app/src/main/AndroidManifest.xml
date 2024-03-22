@@ -16,7 +16,37 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
+            android:name=".PlayerProductWatchOneListView"
+            android:exported="false" />
+        <activity
+            android:name=".PlayerProductWatch"
+            android:exported="false" />
+        <activity
+            android:name=".UpdateDiscountPattern"
+            android:exported="false" />
+        <activity
+            android:name=".OneViewOfPattern"
+            android:exported="false" />
+        <activity
+            android:name=".UpdateProduct"
+            android:exported="false" />
+        <activity
+            android:name=".list_item_product"
+            android:exported="false" />
+        <activity
+            android:name=".DiscountPatternList"
+            android:exported="false" />
+        <activity
+            android:name=".DiscountPattern"
+            android:exported="false" />
+        <activity
+            android:name=".ProductList"
+            android:exported="false" />
+        <activity
             android:name=".product"
+            android:exported="false" />
+        <activity
+            android:name=".AdminPage"
             android:exported="false" />
         <activity
             android:name=".Rules"
@@ -37,10 +67,7 @@
             android:name=".Instructions"
             android:exported="false" />
         <activity
-            android:name=".game"
-            android:exported="false" />
-        <activity
-            android:name=".AdminPage"
+            android:name=".QuestionAddingPage"
             android:exported="false" />
         <activity
             android:name=".MainActivity"

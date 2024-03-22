@@ -13,19 +13,19 @@
         android:text="Game over"
         android:textSize="30dp"
         android:layout_gravity="center"/>
+
     <TextView
-        android:layout_margin="20dp"
         android:id="@+id/message"
-        android:textSize="30dp"
         android:layout_width="350dp"
-        android:layout_height="50dp"
-        />
-    <TextView
+        android:layout_height="101dp"
         android:layout_margin="20dp"
+        android:textSize="30dp" />
+
+    <TextView
         android:id="@+id/result"
-        android:textSize="30dp"
         android:layout_width="350dp"
         android:layout_height="50dp"
-        />
+        android:layout_margin="20dp"
+        android:textSize="30dp" />
 
 </LinearLayout>

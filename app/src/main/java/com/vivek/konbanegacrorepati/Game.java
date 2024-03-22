@@ -153,6 +153,7 @@ public class Game extends AppCompatActivity {
 
                             if(currentIndex==allQuestions.size()-1)
                                 {   cancel();
+                                    onFinish();
                                     intent.putExtra("Score",String.valueOf(Score));
                                     intent.putExtra("current index",currentIndex);
 
@@ -317,9 +318,7 @@ public class Game extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<List<ComplexityWiseQuestion>> call, Throwable t) {
-                Toast.makeText(getApplicationContext(),"failed",Toast.LENGTH_SHORT).show();
-
-                Toast.makeText(getApplicationContext(),t.getMessage(),Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(),"failed  "+t.getMessage(),Toast.LENGTH_SHORT).show();
             }
         });
     }

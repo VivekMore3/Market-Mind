@@ -148,10 +148,79 @@ public interface ApiService {
     @POST("db_product.php")
     Call<ResponseAdmin> ProductInfo(
             @Field("productCode") String productCode,
-            @Field("productName") String productName
+            @Field("productName") String productName,
+            @Field("productDiscount") int productDiscount
+    );
+
+    @FormUrlEncoded
+    @POST("db_discountPattern.php")
+    Call<ResponseAdmin> ProductPattern(
+            @Field("max_discount") int max_discount,
+            @Field("Q1") int Q1,
+            @Field("Q2") int Q2,
+            @Field("Q3") int Q3,
+            @Field("Q4") int Q4,
+            @Field("Q5") int Q5,
+            @Field("Q6") int Q6,
+            @Field("Q7") int Q7,
+            @Field("Q8") int Q8,
+            @Field("Q9") int Q9,
+            @Field("Q10") int Q10
     );
 
 
+    @POST("db_gettingProducts.php")
+    Call<List<ProductGetting>> GetProducts();
+    @POST("db_gettingPattern.php")
+    Call<List<GetPattern>> GettingPattern();
+
+    @FormUrlEncoded
+    @POST("db_UpdateProduct.php")
+    Call<ResponseAdmin> UpdateProduct(
+            @Field("productCode") String productCode,
+            @Field("productName") String productName,
+            @Field("productDiscount") int productDiscount
+    );
+
+    @FormUrlEncoded
+    @POST("db_DeleteProduct.php")
+    Call<ResponseAdmin> DeleteProduct(
+            @Field("productCode") String productCode,
+            @Field("productName") String productName,
+            @Field("productDiscount") int productDiscount
+    );
+
+    @FormUrlEncoded
+    @POST("db_UpdateDiscountPattern.php")
+    Call<ResponseAdmin> UpdatePattern(
+            @Field("max_discount") int max_discount,
+            @Field("Q1") int Q1,
+            @Field("Q2") int Q2,
+            @Field("Q3") int Q3,
+            @Field("Q4") int Q4,
+            @Field("Q5") int Q5,
+            @Field("Q6") int Q6,
+            @Field("Q7") int Q7,
+            @Field("Q8") int Q8,
+            @Field("Q9") int Q9,
+            @Field("Q10") int Q10
+    );
+
+    @FormUrlEncoded
+    @POST("db_DeleteDiscountPattern.php")
+    Call<ResponseAdmin> DeletePattern(
+            @Field("max_discount") int max_discount,
+            @Field("Q1") int Q1,
+            @Field("Q2") int Q2,
+            @Field("Q3") int Q3,
+            @Field("Q4") int Q4,
+            @Field("Q5") int Q5,
+            @Field("Q6") int Q6,
+            @Field("Q7") int Q7,
+            @Field("Q8") int Q8,
+            @Field("Q9") int Q9,
+            @Field("Q10") int Q10
+    );
 
 
    /* @POST("question.php")

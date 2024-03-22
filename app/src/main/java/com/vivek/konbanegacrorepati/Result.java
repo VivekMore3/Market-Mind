@@ -21,7 +21,8 @@ public class Result extends AppCompatActivity {
         intent=getIntent();
        score=Integer.parseInt(intent.getStringExtra("Score"));
         messageText=intent.getStringExtra("message");
-        result.setText(String.valueOf(score));
+        result.setText("You got "+String.valueOf(score/10)+" " +
+                "Question right");
         message.setText(messageText);
 
 
