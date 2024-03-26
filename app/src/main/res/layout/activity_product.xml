@@ -89,16 +89,39 @@
         />
 
         <EditText
-            android:id="@+id/product_discount"
+            android:id="@+id/product_price"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             android:layout_marginTop="@dimen/view_horizontal_margin"
             android:layout_marginBottom="@dimen/view_horizontal_margin"
-            android:hint="Enter the Max Discount"
+            android:hint="Enter The Price"
             android:textSize="@dimen/view_horizontal_margin" />
 
         />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="50dp"
+            android:layout_marginTop="@dimen/view_horizontal_margin"
+            android:layout_marginBottom="@dimen/view_horizontal_margin"
+            android:text="Maximum Discount :"
+            android:textSize="@dimen/view_horizontal_margin" />
+
+        <Spinner
+            android:id="@+id/discounts"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="@dimen/view_horizontal_margin"
+            android:layout_marginBottom="@dimen/view_horizontal_margin"
+            />
     </LinearLayout>
 
     <LinearLayout

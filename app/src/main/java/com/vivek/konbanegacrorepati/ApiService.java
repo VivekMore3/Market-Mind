@@ -149,6 +149,7 @@ public interface ApiService {
     Call<ResponseAdmin> ProductInfo(
             @Field("productCode") String productCode,
             @Field("productName") String productName,
+            @Field("productPrice") int productPrice,
             @Field("productDiscount") int productDiscount
     );
 
@@ -175,10 +176,17 @@ public interface ApiService {
     Call<List<GetPattern>> GettingPattern();
 
     @FormUrlEncoded
+    @POST("db_gettingPatternForQuestion.php")
+    Call<List<GetPattern>> GettingPatternForQuestion(
+        @Field("max_discount") int max_discount
+    );
+
+    @FormUrlEncoded
     @POST("db_UpdateProduct.php")
     Call<ResponseAdmin> UpdateProduct(
             @Field("productCode") String productCode,
             @Field("productName") String productName,
+            @Field("productPrice") int productPrice,
             @Field("productDiscount") int productDiscount
     );
 

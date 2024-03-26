@@ -24,7 +24,7 @@
     <TextView
         android:id="@+id/result"
         android:layout_width="350dp"
-        android:layout_height="50dp"
+        android:layout_height="200dp"
         android:layout_margin="20dp"
         android:textSize="30dp" />
 

@@ -33,7 +33,7 @@ public class Instructions extends AppCompatActivity {
             public void onClick(View v) {
 
 
-                intent=new Intent(Instructions.this, Game.class);
+                intent=new Intent(Instructions.this, PlayerProductList.class);
 
                 startActivity(intent);
             }

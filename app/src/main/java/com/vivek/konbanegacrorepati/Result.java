@@ -12,7 +12,9 @@ public class Result extends AppCompatActivity {
     String messageText;
 
     Intent intent;
-    TextView result,message;
+    TextView result;
+    TextView message;
+    String totalDiscount;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -21,8 +23,9 @@ public class Result extends AppCompatActivity {
         intent=getIntent();
        score=Integer.parseInt(intent.getStringExtra("Score"));
         messageText=intent.getStringExtra("message");
+        totalDiscount=intent.getStringExtra("totalDiscount");
         result.setText("You got "+String.valueOf(score/10)+" " +
-                "Question right");
+                "Question right"+"total discount  = "+totalDiscount);
         message.setText(messageText);
 
 

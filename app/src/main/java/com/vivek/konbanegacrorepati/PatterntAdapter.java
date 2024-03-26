@@ -15,7 +15,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 
-
+import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -28,11 +28,13 @@ public class PatterntAdapter extends ArrayAdapter<GetPattern> {
     Intent intent;
     private Context mContext;
     private List<GetPattern> mPatternList;
+    private List<GetPattern> filteredList;
 
     public PatterntAdapter(Context context, List<GetPattern> patternList) {
         super(context, 0, patternList);
         mContext = context;
         mPatternList = patternList;
+        filteredList = new ArrayList<>(patternList);
     }
 
     @NonNull
@@ -116,4 +118,34 @@ public class PatterntAdapter extends ArrayAdapter<GetPattern> {
 
         return listItem;
     }
+    public void filter(int searchValue) {
+        double tolerance = 0.0001; // Adjust the tolerance level as needed
+        filteredList.clear();
+        for (GetPattern pattern : mPatternList) {
+            if (Math.abs(pattern.getMaxDiscount() - searchValue) < tolerance) {
+                filteredList.add(pattern);
+            }
+        }
+        notifyDataSetChanged();
+    }
+
+    // Override getCount() to return the size of filtered list
+    @Override
+    public int getCount() {
+        return filteredList.size();
+    }
+
+    // Override getItem() to return item from filtered list
+    @Override
+    public GetPattern getItem(int position) {
+        return filteredList.get(position);
+    }
+
+    public void clearFilter() {
+        filteredList.clear();
+        filteredList.addAll(mPatternList);
+        notifyDataSetChanged(); // Notify adapter that data set has changed
+    }
+
+
 }

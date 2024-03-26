@@ -13,6 +13,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -23,9 +24,13 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ProductAdapter extends ArrayAdapter<ProductGetting> {
     Context context;
+    List<ProductGetting> productList;
+    List<ProductGetting> filteredList;
     public ProductAdapter(Context context, List<ProductGetting> products) {
         super(context, 0, products);
         this.context=context;
+        this.productList = products;
+        this.filteredList = new ArrayList<>(products != null ? products : new ArrayList<>());
     }
 
     @Override
@@ -39,17 +44,19 @@ public class ProductAdapter extends ArrayAdapter<ProductGetting> {
         }
 
         // Lookup view for data population
-        TextView productId = convertView.findViewById(R.id.product_id);
+
         TextView productName = convertView.findViewById(R.id.product_name);
-        TextView maxPrice = convertView.findViewById(R.id.max_discount);
+        TextView maxPrice = convertView.findViewById(R.id.product_price);
+        TextView maxDiscount = convertView.findViewById(R.id.max_discount);
         Button tick=convertView.findViewById(R.id.tick);
         Button cross=convertView.findViewById(R.id.cross);
 
 
         // Populate the data into the template view using the data object
-        productId.setText("Product ID: " + product.getProductCode());
         productName.setText("Product Name: " + product.getProductName());
-        maxPrice.setText("Max Discount: " + product.getMaxDiscount());
+        maxPrice.setText("Product Price: " + product.getProductPrice());
+        maxDiscount.setText("Max discount: " + product.getMaxDiscount());
+
         tick.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -59,6 +66,7 @@ public class ProductAdapter extends ArrayAdapter<ProductGetting> {
                 Intent intent = new Intent(context, UpdateProduct.class);
                 intent.putExtra("productId", product.getProductCode());
                 intent.putExtra("productName", product.getProductName());
+                intent.putExtra("maxPrice", String.valueOf(product.getProductPrice()));
                 intent.putExtra("maxDiscount", String.valueOf(product.getMaxDiscount()));
                 context.startActivity(intent);
             }
@@ -108,5 +116,31 @@ public class ProductAdapter extends ArrayAdapter<ProductGetting> {
 
         // Return the completed view to render on screen
         return convertView;
+    }
+    public void filter(String searchText) {
+        filteredList.clear();
+        if (searchText.isEmpty()) {
+            filteredList.addAll(productList); // Add all products if search text is empty
+        } else {
+            searchText = searchText.toLowerCase();
+            for (ProductGetting product : productList) {
+                if (product.getProductName().toLowerCase().contains(searchText)) {
+                    filteredList.add(product); // Add product if its name matches the search text
+                }
+            }
+        }
+        notifyDataSetChanged(); // Notify adapter that data set has changed
+    }
+
+    // Override getCount() to return the size of filtered list
+    @Override
+    public int getCount() {
+        return filteredList.size();
+    }
+
+    // Override getItem() to return item from filtered list
+    @Override
+    public ProductGetting getItem(int position) {
+        return filteredList.get(position);
     }
 }

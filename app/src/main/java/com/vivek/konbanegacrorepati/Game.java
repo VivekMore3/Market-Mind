@@ -1,5 +1,7 @@
 package com.vivek.konbanegacrorepati;
 
+import static com.vivek.konbanegacrorepati.ProductDiscountRecord.questionWiseDiscount;
+
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -31,6 +33,8 @@ public class Game extends AppCompatActivity {
 
     Intent intent;
     List<ComplexityWiseQuestion> allQuestions = new ArrayList<>();
+    int totalDiscount=0;
+    int i=0;
     int Score=0;
 
     String playerAnswer=null;
@@ -139,7 +143,15 @@ public class Game extends AppCompatActivity {
                                 Toast.makeText(getApplicationContext(),playerAnswer,Toast.LENGTH_SHORT).show();
 
                                 Score=Score+10;
-                                Toast.makeText(getApplicationContext(),String.valueOf(Score),Toast.LENGTH_SHORT).show();
+                                for (int i = 0; i < 10; i++) {
+                                    Log.d("QuestionWiseDiscount", "Value at index " + i + ": " + questionWiseDiscount[i]);
+                                }
+                                totalDiscount=totalDiscount+ questionWiseDiscount[i];
+                                Toast.makeText(getApplicationContext(),String.valueOf(questionWiseDiscount[i]),Toast.LENGTH_SHORT).show();
+
+
+                                i++;
+
                             }
                             else{
                                 currentIndex=allQuestions.size()-1;
@@ -184,6 +196,7 @@ public class Game extends AppCompatActivity {
                     if(currentIndex==allQuestions.size()-1)
                     {
                         setQuestion();
+                        intent.putExtra("totalDiscount",String.valueOf(totalDiscount));
                         intent.putExtra("Score",String.valueOf(Score));
                         startActivity(intent);
                         finish();

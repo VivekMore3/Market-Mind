@@ -16,14 +16,15 @@
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/product_id"
+            android:id="@+id/product_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
             android:textSize="18sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"/>
 
         <TextView
-            android:id="@+id/product_name"
+            android:id="@+id/product_price"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
@@ -33,9 +34,8 @@
             android:id="@+id/max_discount"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
             android:textSize="14sp"
-            android:textColor="@android:color/darker_gray"/>
+            />
 
     </LinearLayout>
     <LinearLayout

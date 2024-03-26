@@ -13,7 +13,6 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -22,23 +21,24 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class ProductList extends AppCompatActivity {
+public class PlayerProductList extends AppCompatActivity {
+    Button proceed;
+    Intent intent;
     EditText search;
     ListView productList;
-    Button addProduct;
-    //List<ProductGetting> products=new ArrayList();
-    ProductAdapter adapter;
-
+    PlayerProductAdapter adapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_product_list);
-        getList();
+        setContentView(R.layout.activity_player_product_list);
         getId();
-        addProduct.setOnClickListener(new View.OnClickListener() {
+        getList();
+        proceed.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(ProductList.this,product.class));
+                intent=new Intent(PlayerProductList.this, Game.class);
+
+                startActivity(intent);
             }
         });
         search.addTextChangedListener(new TextWatcher() {
@@ -49,7 +49,9 @@ public class ProductList extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                adapter.filter(s.toString());
+                if (adapter != null) {
+                    adapter.filter(s.toString());
+                }
             }
 
             @Override
@@ -57,15 +59,6 @@ public class ProductList extends AppCompatActivity {
 
             }
         });
-
-        addProduct.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(ProductList.this, product.class));
-            }
-        });
-
-
     }
 
     public void getList() {
@@ -81,7 +74,7 @@ public class ProductList extends AppCompatActivity {
             @Override
             public void onResponse(Call<List<ProductGetting>> call, Response<List<ProductGetting>> response) {
                 List<ProductGetting> products = response.body();
-                adapter = new ProductAdapter(ProductList.this, products);
+                 adapter = new PlayerProductAdapter(PlayerProductList.this, products);
                 productList.setAdapter(adapter);
             }
 
@@ -96,6 +89,6 @@ public class ProductList extends AppCompatActivity {
     private void getId() {
         search=findViewById(R.id.search);
         productList=findViewById(R.id.list);
-        addProduct=findViewById(R.id.addProduct);
+        proceed=findViewById(R.id.proceed);
     }
 }

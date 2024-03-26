@@ -4,6 +4,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -24,6 +26,7 @@ public class DiscountPatternList extends AppCompatActivity {
     EditText search;
     ListView productList;
     Button addProduct;
+    PatterntAdapter patterntAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +39,34 @@ public class DiscountPatternList extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(DiscountPatternList.this,DiscountPattern.class));
+            }
+        });
+        search.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if (s.toString().isEmpty()) {
+                    // If search field is empty, display the entire list
+                    patterntAdapter.clearFilter();
+                } else {
+                    try {
+                        // Parse the input as an integer
+                        int searchValue = Integer.parseInt(s.toString());
+                        patterntAdapter.filter(searchValue);
+                    } catch (NumberFormatException e) {
+                        // Handle if input is not a valid number
+                        patterntAdapter.clearFilter(); // Clear the filter if input is not a valid number
+                    }
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
             }
         });
 
@@ -61,7 +92,7 @@ public class DiscountPatternList extends AppCompatActivity {
             @Override
             public void onResponse(Call<List<GetPattern>> call, Response<List<GetPattern>> response) {
                 List<GetPattern> patterns = response.body();
-                PatterntAdapter patterntAdapter=new PatterntAdapter(DiscountPatternList.this,patterns);
+                patterntAdapter=new PatterntAdapter(DiscountPatternList.this,patterns);
                 productList.setAdapter(patterntAdapter);
             }
 
