@@ -2,6 +2,9 @@ package com.vivek.konbanegacrorepati;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -62,10 +65,20 @@ public class product extends AppCompatActivity {
                         ResponseAdmin responseRegistration=response.body();
                         String success=responseRegistration.getSuccess();
                         String message= responseRegistration.getMessage();
+                        AlertDialog.Builder builder = new AlertDialog.Builder(product.this);
+                        builder.setTitle("Success");
+                        builder.setMessage("Product inserted successfully.");
+                        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.dismiss(); // Close the dialog
+                                startActivity(new Intent(product.this, ProductList.class));
+                            }
+                        });
+                        AlertDialog dialog = builder.create();
+                        dialog.show();
 
-                        Toast.makeText(getApplicationContext(),"success : "+success+"message  :"+message
-                                ,Toast.LENGTH_SHORT).show();
-                        Call<ResponseAdmin> productInfo=apiService.ProductInfo(productCodeText,productNameText,productPriceText,productDiscountText);
+
                     }
 
                     @Override
@@ -124,12 +137,12 @@ public class product extends AppCompatActivity {
     private void gettext() {
         productNameText=productName.getText().toString();
         productCodeText=productCode.getText().toString();
-        productDiscountText=Integer.parseInt(productPrice.getText().toString());
+        productPriceText=Integer.parseInt(productPrice.getText().toString());
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
                 // Get the selected item from the spinner
-                productPriceText = Integer.parseInt(parentView.getItemAtPosition(position).toString());
+                productDiscountText = Integer.parseInt(parentView.getItemAtPosition(position).toString());
               }
 
             @Override

@@ -22,7 +22,7 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class PlayerProductList extends AppCompatActivity {
-    Button proceed;
+
     Intent intent;
     EditText search;
     ListView productList;
@@ -33,14 +33,7 @@ public class PlayerProductList extends AppCompatActivity {
         setContentView(R.layout.activity_player_product_list);
         getId();
         getList();
-        proceed.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                intent=new Intent(PlayerProductList.this, Game.class);
 
-                startActivity(intent);
-            }
-        });
         search.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -89,6 +82,6 @@ public class PlayerProductList extends AppCompatActivity {
     private void getId() {
         search=findViewById(R.id.search);
         productList=findViewById(R.id.list);
-        proceed=findViewById(R.id.proceed);
+
     }
 }

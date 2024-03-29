@@ -8,11 +8,15 @@
     tools:context=".ProductList">
 
     <!-- Search Bar -->
-    <EditText
+    <TextView
         android:id="@+id/search"
         android:layout_width="match_parent"
         android:layout_height="60dp"
-        android:hint="Search..."
+        android:text="Discount Patterns"
+        android:textStyle="bold"
+        android:textSize="22dp"
+        android:gravity="center_horizontal"
+        android:layout_gravity="center_vertical"
         android:padding="8dp"/>
 
     <ListView

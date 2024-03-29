@@ -67,7 +67,7 @@ public class MainActivity extends AppCompatActivity {
                 String success=responseRegistration.getSuccess();
                 String message= responseRegistration.getMessage();
                 userId=responseRegistration.getUserid();
-                if(txt_mobileNumber.equals("74475")&&txt_password.equals("vivek@123")){
+                if(txt_mobileNumber.equals("7")&&txt_password.equals("v")){
                     startActivity(new Intent(MainActivity.this, AdminPage.class));
 
                 }

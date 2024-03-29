@@ -2,6 +2,8 @@ package com.vivek.konbanegacrorepati;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -34,38 +36,68 @@ public class UpdateDiscountPattern extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 gettext();
-                Retrofit retrofit=new Retrofit.Builder()
-                        .baseUrl("http://"+IpAddress.ipAddress+"/php%20api/KBC/")
-                        .addConverterFactory(GsonConverterFactory.create())
-                        .build();
+                sum();
+                if(TmaxDiscount==sum){
+                    Retrofit retrofit=new Retrofit.Builder()
+                            .baseUrl("http://"+IpAddress.ipAddress+"/php%20api/KBC/")
+                            .addConverterFactory(GsonConverterFactory.create())
+                            .build();
 
-                ApiService apiService=retrofit.create(ApiService.class);
-                Call<ResponseAdmin> updatePattern=apiService.UpdatePattern(TmaxDiscount,TQ1,TQ2,TQ3,TQ4,TQ5,TQ6,TQ7,TQ8,TQ9,TQ10);
+                    ApiService apiService=retrofit.create(ApiService.class);
+                    Call<ResponseAdmin> updatePattern=apiService.UpdatePattern(TmaxDiscount,TQ1,TQ2,TQ3,TQ4,TQ5,TQ6,TQ7,TQ8,TQ9,TQ10);
 
-                updatePattern.enqueue(new Callback<ResponseAdmin>() {
-                    @Override
-                    public void onResponse(Call<ResponseAdmin> call, Response<ResponseAdmin> response) {
-                        ResponseAdmin responseRegistration=response.body();
-                        String success=responseRegistration.getSuccess();
-                        String message= responseRegistration.getMessage();
+                    updatePattern.enqueue(new Callback<ResponseAdmin>() {
+                        @Override
+                        public void onResponse(Call<ResponseAdmin> call, Response<ResponseAdmin> response) {
+                            ResponseAdmin responseRegistration=response.body();
+                            String success=responseRegistration.getSuccess();
+                            String message= responseRegistration.getMessage();
 
-                        Toast.makeText(getApplicationContext(),"success : "+success+"message  :"+message
-                                ,Toast.LENGTH_SHORT).show();
-                    }
+                            AlertDialog.Builder builder = new AlertDialog.Builder(UpdateDiscountPattern.this);
+                            builder.setTitle("Success");
+                            builder.setMessage("Pattern updated successfully.");
+                            builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    dialog.dismiss();
+                                    Intent intent = new Intent(UpdateDiscountPattern.this, DiscountPatternList.class);
+                                    startActivity(intent);
 
-                    @Override
-                    public void onFailure(Call<ResponseAdmin> call, Throwable t) {
-                        String errorMessage = t.getMessage();
-
-                        // If the message is null, display a generic error message
-                        if (errorMessage == null) {
-                            errorMessage = "Request failed";
+                                }
+                            });
+                            AlertDialog dialog = builder.create();
+                            dialog.show();
                         }
-                        Log.d("erooooooooooooooor",errorMessage );
-                        // Display the error message in a Toast
-                        Toast.makeText(getApplicationContext(), "Failed: " + errorMessage, Toast.LENGTH_SHORT).show();
-                    }
-                });
+
+                        @Override
+                        public void onFailure(Call<ResponseAdmin> call, Throwable t) {
+                            String errorMessage = t.getMessage();
+
+                            // If the message is null, display a generic error message
+                            if (errorMessage == null) {
+                                errorMessage = "Request failed";
+                            }
+                            Log.d("erooooooooooooooor",errorMessage );
+                            // Display the error message in a Toast
+                            Toast.makeText(getApplicationContext(), "Failed: " + errorMessage, Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                }
+                else{
+                    AlertDialog.Builder builder = new AlertDialog.Builder(UpdateDiscountPattern.this);
+                    builder.setTitle("Error");
+                    builder.setMessage("Indivisual discount Does not add up to the Max discount.");
+                    builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+
+                        }
+                    });
+                    AlertDialog dialog = builder.create();
+                    dialog.show();
+                }
+
             }
         });
     }
@@ -128,5 +160,8 @@ public class UpdateDiscountPattern extends AppCompatActivity {
         Q9=findViewById(R.id.Q9);
         Q10=findViewById(R.id.Q10);
         update=findViewById(R.id.submit);
+    }
+    private void sum(){
+        sum=TQ1+TQ2+TQ3+TQ4+TQ5+TQ6+TQ7+TQ8+TQ9+TQ10;
     }
 }

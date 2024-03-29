@@ -23,7 +23,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class DiscountPatternList extends AppCompatActivity {
 
-    EditText search;
+
     ListView productList;
     Button addProduct;
     PatterntAdapter patterntAdapter;
@@ -41,41 +41,13 @@ public class DiscountPatternList extends AppCompatActivity {
                 startActivity(new Intent(DiscountPatternList.this,DiscountPattern.class));
             }
         });
-        search.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if (s.toString().isEmpty()) {
-                    // If search field is empty, display the entire list
-                    patterntAdapter.clearFilter();
-                } else {
-                    try {
-                        // Parse the input as an integer
-                        int searchValue = Integer.parseInt(s.toString());
-                        patterntAdapter.filter(searchValue);
-                    } catch (NumberFormatException e) {
-                        // Handle if input is not a valid number
-                        patterntAdapter.clearFilter(); // Clear the filter if input is not a valid number
-                    }
-                }
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-
-            }
-        });
 
     }
 
 
 
     private void getId() {
-        search=findViewById(R.id.search);
         productList=findViewById(R.id.List);
         addProduct=findViewById(R.id.addPattern);
     }
