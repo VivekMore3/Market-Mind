@@ -4,13 +4,15 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 public class Result extends AppCompatActivity {
 
     int score;
     String messageText;
-
+    ImageButton backButton;
     Intent intent;
     TextView result;
     TextView message;
@@ -20,12 +22,21 @@ public class Result extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_result);
         findId();
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(Result.this,Instructions.class));
+                finish();
+            }
+        });
         intent=getIntent();
        score=Integer.parseInt(intent.getStringExtra("Score"));
         messageText=intent.getStringExtra("message");
         totalDiscount=intent.getStringExtra("totalDiscount");
-        result.setText("You got "+String.valueOf(score/10)+" " +
-                "Question right"+"total discount  = "+totalDiscount);
+        result.setText("You got " + String.valueOf(score/10) + " " +
+                "Question right.\n" +
+                "Total discount you get is " + totalDiscount + "%");
+
         message.setText(messageText);
 
 
@@ -34,5 +45,6 @@ public class Result extends AppCompatActivity {
     private void findId() {
         result=findViewById(R.id.result);
         message=findViewById(R.id.message);
+        backButton=findViewById(R.id.backButton);
     }
 }

@@ -11,6 +11,7 @@ import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -25,6 +26,7 @@ public class DiscountPattern extends AppCompatActivity {
     EditText maxDiscount,Q1,Q2,Q3,Q4,Q5,Q6,Q7,Q8,Q9,Q10;
     int TmaxDiscount,TQ1,TQ2,TQ3,TQ4,TQ5,TQ6,TQ7,TQ8,TQ9,TQ10,sum=0;
     TextView addition;
+    ImageButton backButton;
     int additionText=0;
 
     Button submit;
@@ -35,6 +37,13 @@ public class DiscountPattern extends AppCompatActivity {
         getId();
         setupTextWatchers();
         gettext();
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(DiscountPattern.this,DiscountPatternList.class));
+                finish();
+            }
+        });
 
 
         submit.setOnClickListener(new View.OnClickListener() {
@@ -118,6 +127,7 @@ public class DiscountPattern extends AppCompatActivity {
         Q10=findViewById(R.id.Q10);
         submit=findViewById(R.id.submit);
         addition=findViewById(R.id.addition);
+        backButton=findViewById(R.id.backButton);
     }
 
     private void setupTextWatchers() {

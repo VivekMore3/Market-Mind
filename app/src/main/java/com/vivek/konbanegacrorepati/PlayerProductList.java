@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -24,6 +25,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class PlayerProductList extends AppCompatActivity {
 
     Intent intent;
+    ImageButton backButton;
     EditText search;
     ListView productList;
     PlayerProductAdapter adapter;
@@ -33,7 +35,13 @@ public class PlayerProductList extends AppCompatActivity {
         setContentView(R.layout.activity_player_product_list);
         getId();
         getList();
-
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(PlayerProductList.this,Instructions.class));
+                finish();
+            }
+        });
         search.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -82,6 +90,7 @@ public class PlayerProductList extends AppCompatActivity {
     private void getId() {
         search=findViewById(R.id.search);
         productList=findViewById(R.id.list);
+        backButton=findViewById(R.id.backButton);
 
     }
 }

@@ -6,7 +6,7 @@
     android:orientation="horizontal"
     android:gravity="end"
     android:padding="16dp"
-    android:background="@drawable/list_item_background">
+    >
 
     <LinearLayout
         android:layout_width="0dp"
@@ -19,7 +19,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="18sp"
-            android:textColor="@color/black"
+            android:textColor="@color/blue"
             android:textStyle="bold"
             tools:text="Product Name" />
 
@@ -28,7 +28,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="14sp"
-            android:textColor="@color/darker_gray"
+            android:textColor="@color/olive"
             tools:text="Max Discount: 10%" />
 
     </LinearLayout>

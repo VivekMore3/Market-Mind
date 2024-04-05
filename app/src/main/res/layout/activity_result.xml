@@ -6,12 +6,20 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".Result">
+    <ImageButton
+        android:id="@+id/backButton"
+        android:layout_width="60dp"
+        android:layout_height="50dp"
+        android:scaleType="fitCenter"
+        android:src="@drawable/back"
+        />
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:text="Game over"
         android:textSize="30dp"
+        android:maxLines="2"
         android:layout_gravity="center"/>
 
     <TextView
@@ -19,6 +27,7 @@
         android:layout_width="350dp"
         android:layout_height="101dp"
         android:layout_margin="20dp"
+        android:maxLines="3"
         android:textSize="30dp" />
 
     <TextView
@@ -26,6 +35,8 @@
         android:layout_width="350dp"
         android:layout_height="200dp"
         android:layout_margin="20dp"
-        android:textSize="30dp" />
+        android:textSize="30dp"
+        android:maxLines="3"
+        />
 
 </LinearLayout>

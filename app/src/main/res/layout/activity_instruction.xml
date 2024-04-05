@@ -6,11 +6,17 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".Instructions">
+    <Button
+        android:id="@+id/logOut"
+        android:layout_marginLeft="300dp"
+        android:layout_width="100dp"
+        android:layout_height="50dp"
+        android:text="Log Out"/>
     <FrameLayout
         android:id="@+id/instruction"
         android:layout_width="350dp"
         android:layout_height="600dp"
-        android:layout_margin="30dp">
+        android:layout_marginLeft="30dp">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

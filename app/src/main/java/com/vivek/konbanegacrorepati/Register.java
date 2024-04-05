@@ -4,11 +4,13 @@ import static androidx.constraintlayout.helper.widget.MotionEffect.TAG;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
@@ -23,7 +25,8 @@ public class Register extends AppCompatActivity {
 
     RadioGroup rgGender ;
     RadioButton rbMale,rbFemale,rbOther;
-    Button submit;
+    Button submit ;
+    ImageButton backButton;
     EditText firstName,lastName,mobileNumber,email,age,password;
     String TfirstName,TlastName,TmobileNumber,Temail,Tage,Tpassword,Tgender;
 
@@ -45,6 +48,13 @@ public class Register extends AppCompatActivity {
                 } else if (checkedId == R.id.Other) {
                     Tgender="other";
                 }
+            }
+        });
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(Register.this,MainActivity.class));
+                finish();
             }
         });
 
@@ -84,6 +94,7 @@ public class Register extends AppCompatActivity {
         age=findViewById(R.id.age);
         password=findViewById(R.id.password);
         submit=findViewById(R.id.Submit);
+        backButton=findViewById(R.id.backButton);
     }
     private boolean validateInputs() {
         // Validate First Name

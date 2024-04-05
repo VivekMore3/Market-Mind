@@ -18,7 +18,7 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class Instructions extends AppCompatActivity {
-    Button startTheGame;
+    Button startTheGame,logOut;
     Intent intent;
 
 
@@ -28,6 +28,16 @@ public class Instructions extends AppCompatActivity {
         setContentView(R.layout.activity_instruction);
         findId();
         getData();
+        logOut.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Instructions.this, MainActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
+                finish(); // Finish the current activity if needed
+
+            }
+        });
         startTheGame.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -76,5 +86,6 @@ public class Instructions extends AppCompatActivity {
 
     private void findId() {
         startTheGame=findViewById(R.id.proceed);
+        logOut=findViewById(R.id.logOut);
     }
 }

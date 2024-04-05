@@ -40,10 +40,10 @@ public class Game extends AppCompatActivity {
     String playerAnswer=null;
     Chronometer timerClock;
     CountDownTimer countDownTimer;
-    TextView questionText,score;
+    TextView questionText,tDiscount;
     RadioGroup options;
     RadioButton option1, option2, option3, option4,option5;
-    Button submit,pause;
+    Button submit;
     int checkSumitAfterOptionSelection=0;
     int checkOnfinish=1;
     boolean timerStop=false;
@@ -81,28 +81,14 @@ public class Game extends AppCompatActivity {
             }
         });
 
-        pause.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                go(timerStop);
-            }
-        });
+
 
     }
-    public void go(boolean bool){
-        if(bool==true){
-            timerClock.start();
-            timerStop=false;
-        }
-        if(bool==false){
-            timerClock.stop();
-            timerStop=true;
-        }
 
-    }
     //setting all the questions one by one to the xml and adding any functions
     private void displayTheQuestions() {
         if (currentIndex < allQuestions.size()) {
+            tDiscount.setText(String.valueOf(totalDiscount));
             ComplexityWiseQuestion currentQuestion = allQuestions.get(currentIndex);
             checkQuestion(currentIndex);
             options.clearCheck();
@@ -117,7 +103,7 @@ public class Game extends AppCompatActivity {
             int questionTime = Integer.parseInt(currentQuestion.getTime()) * 1000; // Convert seconds to milliseconds
             long baseTime = System.currentTimeMillis()+questionTime;
             timerClock.setBase(baseTime);
-            go(true);
+
 
 
 
@@ -136,6 +122,7 @@ public class Game extends AppCompatActivity {
                             //setting the score
                             checkSumitAfterOptionSelection=1;
 
+
                             if(playerAnswer==null){
                                 currentIndex=allQuestions.size()-1;
                             }
@@ -147,8 +134,6 @@ public class Game extends AppCompatActivity {
                                     Log.d("QuestionWiseDiscount", "Value at index " + i + ": " + questionWiseDiscount[i]);
                                 }
                                 totalDiscount=totalDiscount+ questionWiseDiscount[i];
-                                Toast.makeText(getApplicationContext(),String.valueOf(questionWiseDiscount[i]),Toast.LENGTH_SHORT).show();
-
 
                                 i++;
 
@@ -300,9 +285,9 @@ public class Game extends AppCompatActivity {
         option3 = findViewById(R.id.option3);
         option4 = findViewById(R.id.option4);
         option5 = findViewById(R.id.option5);
-        score=findViewById(R.id.score);
+        tDiscount=findViewById(R.id.tDiscount);
         submit=findViewById(R.id.submit);
-        pause=findViewById(R.id.stop);
+
     }
 
     private void getTheData() {

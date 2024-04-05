@@ -6,10 +6,14 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import retrofit2.Call;
@@ -20,8 +24,10 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class UpdateDiscountPattern extends AppCompatActivity {
     Intent intent;
-    EditText maxDiscount,Q1,Q2,Q3,Q4,Q5,Q6,Q7,Q8,Q9,Q10;
-    int TmaxDiscount,TQ1,TQ2,TQ3,TQ4,TQ5,TQ6,TQ7,TQ8,TQ9,TQ10,sum=0;
+    EditText Q1,Q2,Q3,Q4,Q5,Q6,Q7,Q8,Q9,Q10;
+    TextView maxDiscount,addition;
+    int TmaxDiscount,TQ1,TQ2,TQ3,TQ4,TQ5,TQ6,TQ7,TQ8,TQ9,TQ10,sum=0,additionText=0;
+    ImageButton backButton;
     Button update;
 
     @Override
@@ -31,7 +37,14 @@ public class UpdateDiscountPattern extends AppCompatActivity {
         getId();
         getData();
         settext();
-
+        setupTextWatchers();
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(UpdateDiscountPattern.this,DiscountPatternList.class));
+                finish();
+            }
+        });
         update.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -160,8 +173,55 @@ public class UpdateDiscountPattern extends AppCompatActivity {
         Q9=findViewById(R.id.Q9);
         Q10=findViewById(R.id.Q10);
         update=findViewById(R.id.submit);
+        backButton=findViewById(R.id.backButton);
+        addition=findViewById(R.id.addition);
     }
     private void sum(){
         sum=TQ1+TQ2+TQ3+TQ4+TQ5+TQ6+TQ7+TQ8+TQ9+TQ10;
     }
+    private void updateAddition() {
+        additionText = 0;
+        additionText += parseIntOrZero(Q1.getText().toString());
+        additionText += parseIntOrZero(Q2.getText().toString());
+        additionText += parseIntOrZero(Q3.getText().toString());
+        additionText += parseIntOrZero(Q4.getText().toString());
+        additionText += parseIntOrZero(Q5.getText().toString());
+        additionText += parseIntOrZero(Q6.getText().toString());
+        additionText += parseIntOrZero(Q7.getText().toString());
+        additionText += parseIntOrZero(Q8.getText().toString());
+        additionText += parseIntOrZero(Q9.getText().toString());
+        additionText += parseIntOrZero(Q10.getText().toString());
+
+        addition.setText(String.valueOf(additionText));
+    }
+    private void setupTextWatchers() {
+        TextWatcher textWatcher = new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                updateAddition();
+            }
+        };
+        Q1.addTextChangedListener(textWatcher);
+        Q2.addTextChangedListener(textWatcher);
+        Q3.addTextChangedListener(textWatcher);
+        Q4.addTextChangedListener(textWatcher);
+        Q5.addTextChangedListener(textWatcher);
+        Q6.addTextChangedListener(textWatcher);
+        Q7.addTextChangedListener(textWatcher);
+        Q8.addTextChangedListener(textWatcher);
+        Q9.addTextChangedListener(textWatcher);
+        Q10.addTextChangedListener(textWatcher);
+    }
+    private int parseIntOrZero(String input) {
+        return input.isEmpty() ? 0 : Integer.parseInt(input);
+    }
+
 }

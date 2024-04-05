@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -27,6 +28,7 @@ public class DiscountPatternList extends AppCompatActivity {
     ListView productList;
     Button addProduct;
     PatterntAdapter patterntAdapter;
+    ImageButton backButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +37,13 @@ public class DiscountPatternList extends AppCompatActivity {
         getId();
 
         getList();
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(DiscountPatternList.this,AdminPage.class));
+                finish();
+            }
+        });
         addProduct.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -50,6 +59,7 @@ public class DiscountPatternList extends AppCompatActivity {
     private void getId() {
         productList=findViewById(R.id.List);
         addProduct=findViewById(R.id.addPattern);
+        backButton=findViewById(R.id.backButton);
     }
     private void getList() {
         Retrofit retrofit=new Retrofit.Builder()

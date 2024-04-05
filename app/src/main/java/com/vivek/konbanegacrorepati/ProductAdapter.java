@@ -2,7 +2,9 @@ package com.vivek.konbanegacrorepati;
 
 import static androidx.core.content.ContextCompat.startActivity;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -74,42 +76,63 @@ public class ProductAdapter extends ArrayAdapter<ProductGetting> {
         cross.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Retrofit retrofit=new Retrofit.Builder()
-                        .baseUrl("http://"+IpAddress.ipAddress+"/php%20api/KBC/")
-                        .addConverterFactory(GsonConverterFactory.create())
-                        .build();
+                AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                builder.setTitle("Confirmation");
+                builder.setMessage("Do you want to Delete the product?");
 
-                ApiService apiService=retrofit.create(ApiService.class);
-                Call<ResponseAdmin> deleteProduct=apiService.DeleteProduct(product.getProductCode(),product.getProductName(),product.getMaxDiscount());
 
-                deleteProduct.enqueue(new Callback<ResponseAdmin>() {
+                builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     @Override
-                    public void onResponse(Call<ResponseAdmin> call, Response<ResponseAdmin> response) {
-                        ResponseAdmin responseRegistration=response.body();
-                        String success=responseRegistration.getSuccess();
-                        String message= responseRegistration.getMessage();
+                    public void onClick(DialogInterface dialog, int which) {
+                        Retrofit retrofit=new Retrofit.Builder()
+                                .baseUrl("http://"+IpAddress.ipAddress+"/php%20api/KBC/")
+                                .addConverterFactory(GsonConverterFactory.create())
+                                .build();
 
-                        Toast.makeText(context,"success : "+success+"message  :"+message
-                                ,Toast.LENGTH_SHORT).show();
-                        Intent intent = new Intent(context, AdminPage.class);
-                        intent.putExtra("jumpProduct","product");
-                        context.startActivity(intent);
+                        ApiService apiService=retrofit.create(ApiService.class);
+                        Call<ResponseAdmin> deleteProduct=apiService.DeleteProduct(product.getProductCode(),product.getProductName(),product.getMaxDiscount());
 
-                    }
+                        deleteProduct.enqueue(new Callback<ResponseAdmin>() {
+                            @Override
+                            public void onResponse(Call<ResponseAdmin> call, Response<ResponseAdmin> response) {
+                                ResponseAdmin responseRegistration=response.body();
+                                String success=responseRegistration.getSuccess();
+                                String message= responseRegistration.getMessage();
 
-                    @Override
-                    public void onFailure(Call<ResponseAdmin> call, Throwable t) {
-                        String errorMessage = t.getMessage();
+                                Intent intent = new Intent(context, AdminPage.class);
+                                intent.putExtra("jumpProduct","product");
+                                context.startActivity(intent);
 
-                        // If the message is null, display a generic error message
-                        if (errorMessage == null) {
-                            errorMessage = "Request failed";
-                        }
-                        Log.d("erooooooooooooooor",errorMessage );
-                        // Display the error message in a Toast
-                        Toast.makeText(context, "Failed: " + errorMessage, Toast.LENGTH_SHORT).show();
+                            }
+
+                            @Override
+                            public void onFailure(Call<ResponseAdmin> call, Throwable t) {
+                                String errorMessage = t.getMessage();
+
+                                // If the message is null, display a generic error message
+                                if (errorMessage == null) {
+                                    errorMessage = "Request failed";
+                                }
+                                Log.d("erooooooooooooooor",errorMessage );
+                                // Display the error message in a Toast
+                                Toast.makeText(context, "Failed: " + errorMessage, Toast.LENGTH_SHORT).show();
+                            }
+                        });
                     }
                 });
+
+
+                builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        // Dismiss the dialog
+                        dialog.dismiss();
+                    }
+                });
+                AlertDialog dialog = builder.create();
+                dialog.show();
+
+
             }
         });
 

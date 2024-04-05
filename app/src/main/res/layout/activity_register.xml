@@ -5,15 +5,33 @@
     android:layout_margin="@dimen/view_horizontal_margin"
     android:orientation="vertical"
     android:padding="16dp">
+   <LinearLayout
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content">
 
+       <ImageButton
+           android:id="@+id/backButton"
+           android:layout_width="60dp"
+           android:layout_height="50dp"
+           android:scaleType="fitCenter"
+           android:src="@drawable/back" />
 
-    <TextView
+   </LinearLayout>
+
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Win big!"
-        android:layout_gravity="center"
-        android:textSize="60dp"
-        />
+        android:layout_gravity="center_horizontal">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Win big!"
+            android:textColor="@color/dodger_blue"
+            android:layout_gravity="center"
+            android:textStyle="bold|italic"
+            android:textSize="60dp"
+            />
+    </LinearLayout>
     <!-- First Name and Last Name -->
     <LinearLayout
         android:layout_width="match_parent"
@@ -112,6 +130,6 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginTop="16dp"
-        android:text="Register" />
+        android:text="Register"/>
 
 </LinearLayout>

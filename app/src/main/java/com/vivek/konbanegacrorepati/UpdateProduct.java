@@ -2,6 +2,8 @@ package com.vivek.konbanegacrorepati;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -10,6 +12,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -26,6 +29,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class UpdateProduct extends AppCompatActivity {
     TextView productCode;
     EditText productName,productPrice;
+    ImageButton bk;
     Button update,clear;
     String productCodeText,productNameText;
     String productPriceText,productDiscountText;
@@ -43,6 +47,13 @@ public class UpdateProduct extends AppCompatActivity {
         getDataFromPreviousContent();
         setDataOnTextField();
         gettext();
+        bk.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(UpdateProduct.this,ProductList.class));
+                finish();
+            }
+        });
         update.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -62,8 +73,22 @@ public class UpdateProduct extends AppCompatActivity {
                         String success=responseRegistration.getSuccess();
                         String message= responseRegistration.getMessage();
 
-                        Toast.makeText(getApplicationContext(),"success : "+success+"message  :"+message
-                                ,Toast.LENGTH_SHORT).show();
+                        AlertDialog.Builder builder = new AlertDialog.Builder(UpdateProduct.this);
+                        builder.setTitle("Success");
+                        builder.setMessage("Product updated successfully.");
+
+                        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.dismiss();
+                                startActivity(new Intent(UpdateProduct.this,ProductList.class));
+                                finish();
+                            }
+                        });
+
+                        AlertDialog dialog = builder.create();
+                        dialog.show();
+
                     }
 
                     @Override
@@ -154,5 +179,6 @@ public class UpdateProduct extends AppCompatActivity {
         spinner=findViewById(R.id.discount);
         update=findViewById(R.id.update);
         clear=findViewById(R.id.clear);
+        bk=findViewById(R.id.backButton);
     }
 }

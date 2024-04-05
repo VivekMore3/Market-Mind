@@ -12,6 +12,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -27,6 +28,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class product extends AppCompatActivity {
     EditText productCode,productName,productPrice;
     Button submit,clear;
+    ImageButton backButton;
     String productCodeText,productNameText;
     int productPriceText,productDiscountText;
 
@@ -48,6 +50,13 @@ public class product extends AppCompatActivity {
                 productName.setText("");
             }
         });
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(product.this,ProductList.class));
+                finish();
+            }
+        });
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -65,19 +74,24 @@ public class product extends AppCompatActivity {
                         ResponseAdmin responseRegistration=response.body();
                         String success=responseRegistration.getSuccess();
                         String message= responseRegistration.getMessage();
-                        AlertDialog.Builder builder = new AlertDialog.Builder(product.this);
-                        builder.setTitle("Success");
-                        builder.setMessage("Product inserted successfully.");
-                        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                dialog.dismiss(); // Close the dialog
-                                startActivity(new Intent(product.this, ProductList.class));
-                            }
-                        });
-                        AlertDialog dialog = builder.create();
-                        dialog.show();
 
+                        if(success=="false"){
+                            Toast.makeText(getApplicationContext(),"Product Id already exists",Toast.LENGTH_SHORT).show();
+                        }
+                       else {
+                            AlertDialog.Builder builder = new AlertDialog.Builder(product.this);
+                            builder.setTitle("Success");
+                            builder.setMessage("Product inserted successfully.");
+                            builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    dialog.dismiss(); // Close the dialog
+                                    startActivity(new Intent(product.this, ProductList.class));
+                                }
+                            });
+                            AlertDialog dialog = builder.create();
+                            dialog.show();
+                        }
 
                     }
 
@@ -138,18 +152,9 @@ public class product extends AppCompatActivity {
         productNameText=productName.getText().toString();
         productCodeText=productCode.getText().toString();
         productPriceText=Integer.parseInt(productPrice.getText().toString());
-        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
-                // Get the selected item from the spinner
-                productDiscountText = Integer.parseInt(parentView.getItemAtPosition(position).toString());
-              }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parentView) {
-
-            }
-        });
+        if (spinner.getSelectedItem() != null) {
+            productDiscountText = Integer.parseInt(spinner.getSelectedItem().toString());
+        }
 
     }
 
@@ -162,5 +167,6 @@ public class product extends AppCompatActivity {
         spinner=findViewById(R.id.discounts);
         submit=findViewById(R.id.submit);
         clear=findViewById(R.id.clear);
+        backButton=findViewById(R.id.backButton);
     }
 }

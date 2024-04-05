@@ -45,6 +45,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(MainActivity.this,Register.class));
+                finish();
             }
         });
 
@@ -69,6 +70,7 @@ public class MainActivity extends AppCompatActivity {
                 userId=responseRegistration.getUserid();
                 if(txt_mobileNumber.equals("7")&&txt_password.equals("v")){
                     startActivity(new Intent(MainActivity.this, AdminPage.class));
+                    Toast.makeText(getApplicationContext(),"WELCOME ....Damle Sir",Toast.LENGTH_SHORT).show();
 
                 }
                 else if(userId>0){
@@ -76,10 +78,12 @@ public class MainActivity extends AppCompatActivity {
                     intent=new Intent(MainActivity.this, Instructions.class);
                     QuestionNumber.userId=userId;
                     startActivity(intent);
+                    finish();
+                    Toast.makeText(getApplicationContext(),"Login successful",Toast.LENGTH_SHORT).show();
+
                 }
 
 
-                Toast.makeText(getApplicationContext(),"success : "+success+"message  :"+message+"userId  :"+userId,Toast.LENGTH_SHORT).show();
 
             }
 

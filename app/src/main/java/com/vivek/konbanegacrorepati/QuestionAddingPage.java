@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
@@ -24,6 +25,7 @@ public class QuestionAddingPage extends AppCompatActivity {
     EditText question;
     RadioGroup option;
     RadioButton optionA,optionB,optionC,optionD,optionE;
+    ImageButton backButton;
 
     EditText optionA_txt,optionB_txt,optionC_txt,optionD_txt,optionE_txt;
     RadioGroup complexity;
@@ -40,10 +42,16 @@ public class QuestionAddingPage extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.question_adding_page);
-
         //getting all the ids
         findId();
 
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(QuestionAddingPage.this,AdminPage.class));
+                finish();
+            }
+        });
 
         //getting the correct option
         option.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
@@ -362,6 +370,7 @@ public class QuestionAddingPage extends AppCompatActivity {
         c05=findViewById(R.id.c05);
         time=findViewById(R.id.time);
         submit=findViewById(R.id.submit);
+        backButton=findViewById(R.id.backButton);
         //product=findViewById(R.id.product);
     }
 }

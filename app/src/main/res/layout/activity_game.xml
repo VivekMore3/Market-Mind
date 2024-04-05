@@ -9,25 +9,29 @@
        android:layout_height="wrap_content"
        android:orientation="horizontal">
 
-       <Button
-           android:id="@+id/stop"
+       <TextView
+
            android:layout_width="wrap_content"
            android:layout_height="wrap_content"
            android:layout_marginLeft="@dimen/view_horizontal_margin"
            android:layout_marginTop="@dimen/view_horizontal_margin"
            android:layout_marginBottom="@dimen/view_horizontal_margin"
-           android:padding="@dimen/view_vertical_margin"
-           android:text=" stop" />
+           android:padding="5dp"
+           android:text="Discount"
+           android:textSize="20dp"
+           android:textColor="@color/dark_cyan"/>
+
 
        <TextView
-           android:id="@+id/score"
-           android:layout_width="100dp"
+           android:id="@+id/tDiscount"
+           android:layout_width="50dp"
            android:layout_height="wrap_content"
-           android:padding="@dimen/view_vertical_margin"
+           android:text="0"
+           android:padding="10dp"
            android:layout_marginRight="@dimen/view_horizontal_margin"
            android:layout_marginTop="@dimen/view_horizontal_margin"
            android:layout_marginBottom="@dimen/view_horizontal_margin"
-
+            android:textSize="20dp"
            />
 
        <Chronometer
@@ -36,9 +40,10 @@
            android:layout_height="wrap_content"
            android:padding="@dimen/view_vertical_margin"
            android:layout_marginTop="@dimen/view_horizontal_margin"
-           android:layout_marginLeft="100dp"
+           android:layout_marginLeft="150dp"
            android:format="%s"
-           android:textSize="16sp" />
+           android:textSize="16sp"
+           android:textColor="@color/red"/>
 
    </LinearLayout>
 
@@ -49,9 +54,12 @@
         android:hint="Type your text here..."
         android:inputType="textMultiLine"
         android:layout_margin="@dimen/view_horizontal_margin"
+
+
         android:lines="5"
         android:textSize="18sp"
-        android:padding="16dp"/>
+        android:padding="16dp"
+        android:textColor="@color/deep_sky_blue"/>
 
     <!-- Radio Buttons for Options -->
     <RadioGroup
@@ -65,31 +73,36 @@
             android:id="@+id/option1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Option 1"/>
+            android:text="Option 1"
+            android:textColor="@color/teal"/>
 
         <RadioButton
             android:id="@+id/option2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Option 2"/>
+            android:text="Option 2"
+            android:textColor="@color/teal"/>
 
         <RadioButton
             android:id="@+id/option3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Option 3"/>
+            android:text="Option 3"
+            android:textColor="@color/teal"/>
 
         <RadioButton
             android:id="@+id/option4"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Option 4"/>
+            android:text="Option 4"
+            android:textColor="@color/teal"/>
 
         <RadioButton
             android:id="@+id/option5"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Option 5"/>
+            android:text="Option 5"
+            android:textColor="@color/teal"/>
     </RadioGroup>
     <Button
         android:id="@+id/submit"
