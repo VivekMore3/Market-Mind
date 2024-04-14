@@ -18,10 +18,9 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class MainActivity extends AppCompatActivity {
 
-    TextView signUp;
     EditText mobileNumber;
     EditText password;
-    Button login;
+    Button login,signUp;
     String txt_mobileNumber,txt_password;
     Intent intent;
     int userId=0;
@@ -68,7 +67,7 @@ public class MainActivity extends AppCompatActivity {
                 String success=responseRegistration.getSuccess();
                 String message= responseRegistration.getMessage();
                 userId=responseRegistration.getUserid();
-                if(txt_mobileNumber.equals("7")&&txt_password.equals("v")){
+                if(txt_mobileNumber.equals("7447512792")&&txt_password.equals("vicky")){
                     startActivity(new Intent(MainActivity.this, AdminPage.class));
                     Toast.makeText(getApplicationContext(),"WELCOME ....Damle Sir",Toast.LENGTH_SHORT).show();
 
@@ -80,6 +79,10 @@ public class MainActivity extends AppCompatActivity {
                     startActivity(intent);
                     finish();
                     Toast.makeText(getApplicationContext(),"Login successful",Toast.LENGTH_SHORT).show();
+
+                }
+                else{
+                    Toast.makeText(getApplicationContext(),"USER ID OR PASSWORD IS INCORRECT",Toast.LENGTH_SHORT).show();
 
                 }
 

@@ -6,13 +6,14 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 public class Result extends AppCompatActivity {
 
     int score;
     String messageText;
-    ImageButton backButton;
+    ImageView backButton;
     Intent intent;
     TextView result;
     TextView message;
@@ -33,9 +34,9 @@ public class Result extends AppCompatActivity {
        score=Integer.parseInt(intent.getStringExtra("Score"));
         messageText=intent.getStringExtra("message");
         totalDiscount=intent.getStringExtra("totalDiscount");
-        result.setText("You got " + String.valueOf(score/10) + " " +
-                "Question right.\n" +
-                "Total discount you get is " + totalDiscount + "%");
+        result.setText("CORRECT QUESTIONS:  " + String.valueOf(score/10) +
+                "\n\n" +
+                "DISCOUNT: " + totalDiscount + "%");
 
         message.setText(messageText);
 

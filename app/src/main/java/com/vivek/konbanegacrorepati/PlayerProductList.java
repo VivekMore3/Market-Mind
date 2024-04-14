@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -25,7 +26,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class PlayerProductList extends AppCompatActivity {
 
     Intent intent;
-    ImageButton backButton;
+    ImageView backButton;
     EditText search;
     ListView productList;
     PlayerProductAdapter adapter;

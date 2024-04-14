@@ -1,135 +1,239 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mainLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_margin="@dimen/view_horizontal_margin"
-    android:orientation="vertical"
-    android:padding="16dp">
-   <LinearLayout
-       android:layout_width="wrap_content"
-       android:layout_height="wrap_content">
+    android:background="#F0F8FF"
+    tools:context=".Register">
 
-       <ImageButton
-           android:id="@+id/backButton"
-           android:layout_width="60dp"
-           android:layout_height="50dp"
-           android:scaleType="fitCenter"
-           android:src="@drawable/back" />
-
-   </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Win big!"
-            android:textColor="@color/dodger_blue"
-            android:layout_gravity="center"
-            android:textStyle="bold|italic"
-            android:textSize="60dp"
-            />
-    </LinearLayout>
-    <!-- First Name and Last Name -->
-    <LinearLayout
+    <RelativeLayout
+        android:id="@+id/relativeLayout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/view_horizontal_margin"
-        android:orientation="horizontal">
+        android:layout_height="100sp"
+        android:background="@drawable/wave_2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-        <EditText
-            android:id="@+id/firstName"
-            android:layout_width="0dp"
+    <LinearLayout
+        android:layout_width="377dp"
+        android:layout_height="630dp"
+        android:layout_margin="@dimen/view_horizontal_margin"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.487"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/relativeLayout"
+        app:layout_constraintVertical_bias="0.341">
+
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/TLay"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
+            android:layout_marginTop="10dp"
             android:hint="First Name"
-            android:inputType="textPersonName" />
+            app:boxBackgroundColor="#FFFFFF"
+            app:boxBackgroundMode="outline"
+            app:boxStrokeColor="#125488"
+            app:counterEnabled="false"
+            app:endIconMode="clear_text"
+            app:endIconTint="#08A3EB"
+            app:errorEnabled="false"
+            app:helperTextTextColor="#125488"
+            app:hintTextColor="#125488"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/backButton"
+            app:startIconTint="#08A3EB">
 
-        <EditText
-            android:id="@+id/lastName"
-            android:layout_width="0dp"
+            <EditText
+                android:id="@+id/firstName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:inputType="textPersonName" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/TLay1"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
+            android:layout_marginTop="10dp"
             android:hint="Last Name"
-            android:inputType="textPersonName" />
+            app:boxBackgroundColor="#FFFFFF"
+            app:boxBackgroundMode="outline"
+            app:boxStrokeColor="#125488"
+            app:counterEnabled="false"
+            app:endIconMode="clear_text"
+            app:endIconTint="#08A3EB"
+            app:errorEnabled="false"
+            app:helperTextTextColor="#125488"
+            app:hintTextColor="#125488"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/backButton"
+            app:startIconTint="#08A3EB">
+
+            <EditText
+                android:id="@+id/lastName"
+                android:layout_width="match_parent"
+                android:layout_height="58dp"
+                android:textColor="@color/black"
+                android:inputType="textPersonName" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/TLay4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:hint="Contact"
+            app:boxBackgroundColor="#FFFFFF"
+            app:boxStrokeColor="#125488"
+            app:counterEnabled="true"
+            app:counterMaxLength="10"
+            app:endIconMode="clear_text"
+            app:endIconTint="#08A3EB"
+            app:errorEnabled="false"
+            app:helperTextTextColor="#125488"
+            app:hintTextColor="#125488"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/TLay3new"
+            app:prefixText="+91"
+            app:startIconTint="#08A3EB">
+
+            <EditText
+                android:id="@+id/mobileNumber"
+                android:layout_width="match_parent"
+                android:layout_height="58dp"
+                android:textColor="@color/black"
+                android:inputType="phone"
+                android:phoneNumber="true" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/TLay3new"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:hint="Age"
+            app:boxBackgroundColor="#FFFFFF"
+            app:boxBackgroundMode="outline"
+            app:boxStrokeColor="#125488"
+            app:counterEnabled="true"
+            app:counterMaxLength="2"
+            app:endIconMode="clear_text"
+            app:endIconTint="#08A3EB"
+            app:helperTextTextColor="#125488"
+            app:hintTextColor="#125488"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/TLay2"
+            app:startIconTint="#08A3EB">
+
+            <EditText
+                android:id="@+id/age"
+                android:layout_width="match_parent"
+                android:layout_height="58dp"
+                android:textColor="@color/black"
+                android:inputType="number" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/TLayEmail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:hint="Email"
+            app:boxBackgroundColor="#FFFFFF"
+            app:boxBackgroundMode="outline"
+            app:boxStrokeColor="#125488"
+            app:endIconMode="clear_text"
+            app:endIconTint="#08A3EB"
+            app:errorEnabled="false"
+            app:helperTextTextColor="#125488"
+            app:hintTextColor="#125488"
+            app:startIconTint="#08A3EB">
+
+            <EditText
+                android:id="@+id/email"
+                android:layout_width="match_parent"
+                android:layout_height="58dp"
+                android:textColor="@color/black"
+                android:inputType="textEmailAddress" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/passwordI"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:hint="Password"
+            app:boxBackgroundColor="#FFFFFF"
+            app:boxBackgroundMode="outline"
+            app:boxStrokeColor="#125488"
+            app:endIconMode="password_toggle"
+            app:endIconTint="#08A3EB"
+            app:errorEnabled="false"
+            app:helperTextTextColor="#125488"
+            app:hintTextColor="#125488"
+            app:startIconTint="#08A3EB">
+
+            <EditText
+                android:id="@+id/password"
+                android:layout_width="match_parent"
+                android:layout_height="58dp"
+                android:textColor="@color/black"
+                android:inputType="textPassword" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+        <!-- Add other fields similarly -->
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/Submit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="32dp"
+            android:background="@drawable/button_corner"
+            android:backgroundTint="#125488"
+            android:maxEms="10"
+            android:text="save"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/SaveBtn">
+
+        </androidx.appcompat.widget.AppCompatButton>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/back"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="32dp"
+            android:background="@drawable/button_corner"
+            android:backgroundTint="#125488"
+            android:text="Login"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/EditBtn">
+
+        </androidx.appcompat.widget.AppCompatButton>
+
 
     </LinearLayout>
 
-    <!-- Mobile Number -->
-    <EditText
-        android:id="@+id/mobileNumber"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/view_horizontal_margin"
-        android:hint="Mobile Number"
-        android:inputType="phone" />
-
-    <!-- Email -->
-    <EditText
-        android:id="@+id/email"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/view_horizontal_margin"
-        android:hint="email"
-        android:inputType="textEmailAddress" />
-
-    <!-- Age -->
-    <EditText
-        android:id="@+id/age"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/view_horizontal_margin"
-        android:hint="age"
-        android:inputType="number" />
-
-    <!-- Gender -->
-    <RadioGroup
-        android:id="@+id/Gender"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Gender" />
-
-        <RadioButton
-            android:id="@+id/Male"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Male" />
-
-        <RadioButton
-            android:id="@+id/Female"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Female" />
-
-        <RadioButton
-            android:id="@+id/Other"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Other" />
-    </RadioGroup>
-
-    <!-- Area -->
-    <EditText
-        android:id="@+id/password"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="password"
-        android:inputType="textPassword" />
-
-    <!-- Button to Submit Registration -->
-    <Button
-        android:id="@+id/Submit"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="16dp"
-        android:text="Register"/>
-
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

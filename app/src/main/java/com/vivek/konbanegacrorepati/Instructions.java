@@ -7,6 +7,8 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import java.util.List;
@@ -18,7 +20,8 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class Instructions extends AppCompatActivity {
-    Button startTheGame,logOut;
+    Button startTheGame;
+    ImageView logOut;
     Intent intent;
 
 

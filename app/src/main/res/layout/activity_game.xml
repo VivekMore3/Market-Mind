@@ -2,7 +2,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="#f0f8ff">
 
    <LinearLayout
        android:layout_width="wrap_content"
@@ -47,71 +48,105 @@
 
    </LinearLayout>
 
-    <TextView
-        android:id="@+id/questionText"
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:id="@+id/editProfile"
         android:layout_width="match_parent"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:gravity="center"
+        android:backgroundTint="@color/white"
+        android:background="@drawable/menu_item_bg"
+        android:clickable="true"
+        android:layout_marginEnd="20dp"
+        android:padding="15dp"
         android:layout_height="wrap_content"
-        android:hint="Type your text here..."
-        android:inputType="textMultiLine"
-        android:layout_margin="@dimen/view_horizontal_margin"
+        android:orientation="horizontal">
+        <TextView
+            android:id="@+id/questionText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Type your text here..."
+            android:inputType="textMultiLine"
+            android:layout_margin="@dimen/view_horizontal_margin"
+            android:lines="5"
+            android:textSize="18sp"
+            android:padding="16dp"
+            android:textColor="#125488"/>
 
+    </androidx.appcompat.widget.LinearLayoutCompat>
 
-        android:lines="5"
-        android:textSize="18sp"
-        android:padding="16dp"
-        android:textColor="@color/deep_sky_blue"/>
-
-    <!-- Radio Buttons for Options -->
-    <RadioGroup
-        android:id="@+id/optionsRadioGroup"
+    <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="match_parent"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:gravity="center"
+        android:backgroundTint="@color/white"
+        android:background="@drawable/menu_item_bg"
+        android:clickable="true"
+        android:layout_marginEnd="20dp"
+        android:padding="15dp"
         android:layout_height="wrap_content"
-        android:layout_below="@id/questionText"
-        android:padding="16dp">
-
-        <RadioButton
-            android:id="@+id/option1"
+        android:orientation="horizontal">
+        <RadioGroup
+            android:id="@+id/optionsRadioGroup"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Option 1"
-            android:textColor="@color/teal"/>
+            android:layout_below="@id/questionText"
+            android:padding="16dp">
 
-        <RadioButton
-            android:id="@+id/option2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Option 2"
-            android:textColor="@color/teal"/>
+            <RadioButton
+                android:id="@+id/option1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Option 1"
+                android:textColor="@color/teal"/>
 
-        <RadioButton
-            android:id="@+id/option3"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Option 3"
-            android:textColor="@color/teal"/>
 
-        <RadioButton
-            android:id="@+id/option4"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Option 4"
-            android:textColor="@color/teal"/>
+            <RadioButton
+                android:id="@+id/option2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Option 2"
+                android:textColor="@color/teal"/>
 
-        <RadioButton
-            android:id="@+id/option5"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Option 5"
-            android:textColor="@color/teal"/>
-    </RadioGroup>
-    <Button
+            <RadioButton
+                android:id="@+id/option3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Option 3"
+                android:textColor="@color/teal"/>
+
+            <RadioButton
+                android:id="@+id/option4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Option 4"
+                android:textColor="@color/teal"/>
+
+            <RadioButton
+                android:id="@+id/option5"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Option 5"
+                android:textColor="@color/teal"/>
+        </RadioGroup>
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/submit"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="20dp"
+        android:background="@drawable/button_corner"
+        android:backgroundTint="#125488 "
         android:text="SUBMIT"
-        android:layout_marginTop="40dp"
-        android:layout_gravity="center_horizontal"
-        />
+        android:textColor="@color/white"
+        android:textStyle="bold">
+
+    </androidx.appcompat.widget.AppCompatButton>
 
 
 

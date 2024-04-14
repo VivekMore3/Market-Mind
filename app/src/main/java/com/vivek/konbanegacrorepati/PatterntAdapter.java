@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -50,8 +51,8 @@ public class PatterntAdapter extends ArrayAdapter<GetPattern> {
         GetPattern currentPattern = mPatternList.get(position);
 
         TextView patternTextView = listItem.findViewById(R.id.pattern);
-        Button tick=listItem.findViewById(R.id.tick);
-        Button cross=listItem.findViewById(R.id.cross);
+        ImageView tick=listItem.findViewById(R.id.tick);
+        ImageView cross=listItem.findViewById(R.id.cross);
         patternTextView.setText(String.valueOf(currentPattern.getMaxDiscount()));
         tick.setOnClickListener(new View.OnClickListener() {
             @Override

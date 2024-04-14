@@ -6,6 +6,9 @@
     android:orientation="horizontal"
     android:gravity="end"
     android:padding="16dp"
+    android:layout_marginTop="4dp"
+    android:layout_marginStart="10dp"
+    android:layout_marginEnd="10dp"
     >
 
     <LinearLayout
@@ -19,8 +22,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="18sp"
-            android:textColor="@color/blue"
-            android:textStyle="bold"
+            android:textColor="#125488"
             tools:text="Product Name" />
 
         <TextView
@@ -28,7 +30,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="14sp"
-            android:textColor="@color/olive"
+            android:textColor="@color/darker_gray"
             tools:text="Max Discount: 10%" />
 
     </LinearLayout>

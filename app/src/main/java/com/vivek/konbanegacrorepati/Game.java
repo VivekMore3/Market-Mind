@@ -172,7 +172,7 @@ public class Game extends AppCompatActivity {
                     if(playerAnswer==null||checkSumitAfterOptionSelection==0){
 
 
-                        intent.putExtra("message","OOps!! Time up For the Question");
+                        intent.putExtra("message","OOps!!! \n Time up For the Question");
                         currentIndex=allQuestions.size()-1;
 
                     }

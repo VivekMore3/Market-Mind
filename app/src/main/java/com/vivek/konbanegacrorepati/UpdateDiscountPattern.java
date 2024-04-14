@@ -13,6 +13,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -27,7 +28,7 @@ public class UpdateDiscountPattern extends AppCompatActivity {
     EditText Q1,Q2,Q3,Q4,Q5,Q6,Q7,Q8,Q9,Q10;
     TextView maxDiscount,addition;
     int TmaxDiscount,TQ1,TQ2,TQ3,TQ4,TQ5,TQ6,TQ7,TQ8,TQ9,TQ10,sum=0,additionText=0;
-    ImageButton backButton;
+    ImageView backButton;
     Button update;
 
     @Override

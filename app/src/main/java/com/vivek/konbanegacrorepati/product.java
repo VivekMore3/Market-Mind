@@ -13,6 +13,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -28,7 +29,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class product extends AppCompatActivity {
     EditText productCode,productName,productPrice;
     Button submit,clear;
-    ImageButton backButton;
+    ImageView backButton;
     String productCodeText,productNameText;
     int productPriceText,productDiscountText;
 
@@ -48,6 +49,7 @@ public class product extends AppCompatActivity {
             public void onClick(View v) {
                 productCode.setText("");
                 productName.setText("");
+                productPrice.setText("");
             }
         });
         backButton.setOnClickListener(new View.OnClickListener() {

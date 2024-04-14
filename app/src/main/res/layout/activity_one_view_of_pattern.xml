@@ -4,20 +4,26 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".OneViewOfPattern">
+    tools:context=".OneViewOfPattern"
+    android:gravity="end"
+    android:layout_marginTop="2dp"
+    android:layout_marginBottom="2dp"
+    android:layout_marginStart="10dp"
+    android:layout_marginEnd="10dp"
+    >
 
     <LinearLayout
         android:layout_width="0dp"
         android:layout_weight="1"
         android:layout_height="wrap_content">
+
         <TextView
             android:id="@+id/pattern"
-            android:layout_gravity="center_horizontal"
-            android:layout_width="300dp"
-            android:layout_height="80dp"
-            android:textSize="18sp"
-            android:textStyle="bold"
-            />
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/azure_blue"
+            android:layout_marginTop="8dp"
+            android:textSize="16sp" />
     </LinearLayout>
 
     <LinearLayout
@@ -27,22 +33,20 @@
         android:gravity="end"
         >
         <!-- Button with Cross Symbol -->
-        <Button
+        <ImageView
             android:id="@+id/cross"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="✘"
-            android:textSize="20sp"
-            android:textColor="@android:color/holo_red_dark" />
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/outline_cancel_24"
+            android:clickable="true"/>
 
         <!-- Button with Tick Symbol -->
-        <Button
+        <ImageView
             android:id="@+id/tick"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="✔"
-            android:textSize="20sp"
-            android:textColor="@android:color/holo_green_dark"/>
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/outline_file_download_done_24"
+            android:clickable="true"/>
 
     </LinearLayout>
 

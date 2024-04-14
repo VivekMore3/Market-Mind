@@ -53,7 +53,22 @@
     <color name="deep_pink">#FF1493</color>
     <color name="deep_sky_blue">#00BFFF</color>
     <color name="dim_gray">#696969</color>
-    <color name="dodger_blue">#1E90FF</color>
+
     <color name="firebrick">#B22222</color>
     <color name="forest_green">#21C621</color>
+    <color name="azure_blue">#007FFF</color>
+    <color name="baby_blue">#89CFF0</color>
+    <color name="celestial_blue">#4997D0</color>
+    <color name="cerulean_blue">#2A52BE</color>
+    <color name="cornflower_blue">#6495ED</color>
+    <color name="dodger_blue">#1E90FF</color>
+    <color name="electric_blue">#7DF9FF</color>
+    <color name="ice_blue">#D4F1F9</color>
+    <color name="midnight_blue">#191970</color>
+    <color name="navy_blue">#000080</color>
+    <color name="royal_blue">#4169E1</color>
+    <color name="sapphire_blue">#0F52BA</color>
+    <color name="steel_blue">#4682B4</color>
+    <color name="alice_blue">#F0F8FF</color>
+
 </resources>

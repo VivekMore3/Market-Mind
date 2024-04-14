@@ -5,38 +5,55 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".Instructions">
-    <Button
+    tools:context=".Instructions"
+    android:background="#f0f8ff"
+    >
+    <ImageView
         android:id="@+id/logOut"
-        android:layout_marginLeft="300dp"
-        android:layout_width="100dp"
+        android:layout_marginLeft="350dp"
+        android:layout_width="50dp"
         android:layout_height="50dp"
-        android:text="Log Out"/>
+        android:clickable="true"
+        android:layout_marginTop="10dp"
+        android:background="#f0f8ff"
+        android:src="@drawable/baseline_logout_24">
+
+    </ImageView>
+
     <FrameLayout
         android:id="@+id/instruction"
         android:layout_width="350dp"
         android:layout_height="600dp"
-        android:layout_marginLeft="30dp">
+        android:layout_marginTop="25dp">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:layout_marginEnd="30dp"
+            android:textColor="@color/black"
             android:text="Rules for the game:\n\n
-    1. The game consists of 10 questions.\n\n
-    2. The complexity of questions increases as you progress.\n\n
-    3. Each question will have a designated time limit within which you must provide your answer and proceed to the next question.\n\n
-    4. If you select your answer but fail to submit it, the game will end for you.\n\n
-    5. Submitting a wrong answer will also result in the termination of your game.\n\n
-    \n\n Keep playing for exciting gifts and discounts."
+    1. The game consists of 10 \n    questions.\n\n
+    2. The complexity of questions \n    increases as you progress.\n\n
+    3. Each question will have a \n    designated time limit within which \n    you must provide your answer \n    and proceed to the next question.\n\n
+    4. If you select your answer but \n    fail to submit it, the game will end \n    for you.\n\n
+    5. Submitting a wrong answer \n    will also result in the termination \n    of your game.\n\n
+    \n\n  Keep playing for exciting gifts and \n  discounts!!!"
             android:textSize="18dp"/>
     </FrameLayout>
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/proceed"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
-        android:layout_marginLeft="150dp"
-
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp"
         android:text="Proceed"
-        />
+        android:background="@drawable/button_corner"
+        android:backgroundTint="#125488"
+        android:maxEms="10"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        >
 
+    </androidx.appcompat.widget.AppCompatButton>
 </LinearLayout>

@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -23,12 +24,10 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class DiscountPatternList extends AppCompatActivity {
-
-
     ListView productList;
     Button addProduct;
     PatterntAdapter patterntAdapter;
-    ImageButton backButton;
+    ImageView backButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

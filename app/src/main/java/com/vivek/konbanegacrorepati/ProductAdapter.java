@@ -12,6 +12,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -50,8 +52,8 @@ public class ProductAdapter extends ArrayAdapter<ProductGetting> {
         TextView productName = convertView.findViewById(R.id.product_name);
         TextView maxPrice = convertView.findViewById(R.id.product_price);
         TextView maxDiscount = convertView.findViewById(R.id.max_discount);
-        Button tick=convertView.findViewById(R.id.tick);
-        Button cross=convertView.findViewById(R.id.cross);
+        ImageView tick=convertView.findViewById(R.id.tick);
+        ImageView cross=convertView.findViewById(R.id.cross);
 
 
         // Populate the data into the template view using the data object

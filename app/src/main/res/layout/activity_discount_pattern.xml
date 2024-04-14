@@ -6,23 +6,25 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:layout_marginTop="30dp"
     tools:context=".DiscountPattern">
-    <ImageButton
+    <ImageView
         android:id="@+id/backButton"
-        android:layout_width="60dp"
-        android:layout_height="50dp"
-        android:scaleType="fitCenter"
-        android:src="@drawable/back"
-        android:layout_marginTop="20dp"/>
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginLeft="15dp"
+        android:src="@drawable/baseline_arrow_back_ios_24"/>
 
     <TextView
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:gravity="center_horizontal"
-        android:layout_marginTop="18dp"
-        android:layout_marginBottom="10dp"
-        android:text="DICOUNT PATTERN"
-        android:textSize="20dp"
+        android:layout_gravity="center_horizontal"
+        android:textColor="@color/black"
+        android:layout_marginBottom="15dp"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:text="DISCOUNT PATTERN"
+
         />
 
     <LinearLayout
@@ -83,8 +85,12 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
                 android:text="Question 1       :"
-                android:textSize="20dp"
                 />
             <EditText
                 android:id="@+id/Q1"
@@ -104,8 +110,13 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
                 android:text="Question 2       :"
-                android:textSize="20dp"
+
                 />
             <EditText
                 android:id="@+id/Q2"
@@ -125,8 +136,12 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
                 android:text="Question 3       :"
-                android:textSize="20dp"
                 />
             <EditText
                 android:id="@+id/Q3"
@@ -145,8 +160,13 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
                 android:text="Question 4       :"
-                android:textSize="20dp"
+
                 />
             <EditText
                 android:id="@+id/Q4"
@@ -166,8 +186,12 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
                 android:text="Question 5       :"
-                android:textSize="20dp"
                 />
             <EditText
                 android:id="@+id/Q5"
@@ -187,8 +211,12 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
                 android:text="Question 6       :"
-                android:textSize="20dp"
                 />
             <EditText
                 android:id="@+id/Q6"
@@ -208,8 +236,12 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
                 android:text="Question 7       :"
-                android:textSize="20dp"
                 />
             <EditText
                 android:id="@+id/Q7"
@@ -229,8 +261,12 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
                 android:text="Question 8       :"
-                android:textSize="20dp"
                 />
             <EditText
                 android:id="@+id/Q8"
@@ -250,8 +286,12 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
                 android:text="Question 9       :"
-                android:textSize="20dp"
                 />
             <EditText
                 android:id="@+id/Q9"
@@ -267,12 +307,17 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="50dp"
+            android:layout_marginBottom="20dp"
             android:orientation="horizontal">
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
                 android:text="Question 10     :"
-                android:textSize="20dp"
                 />
             <EditText
                 android:id="@+id/Q10"
@@ -287,10 +332,14 @@
 
     <Button
         android:id="@+id/submit"
-        android:layout_marginTop="30dp"
-        android:layout_marginLeft="150dp"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Submit"
+        android:textAllCaps="true"
+        android:backgroundTint="#125488"
+        android:textStyle="bold"
+
+        android:text="Add pattern"
+        android:layout_margin="16dp"
+
         />
 </LinearLayout>

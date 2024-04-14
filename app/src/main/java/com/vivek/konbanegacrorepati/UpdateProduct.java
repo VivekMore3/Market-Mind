@@ -13,6 +13,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -29,8 +30,8 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class UpdateProduct extends AppCompatActivity {
     TextView productCode;
     EditText productName,productPrice;
-    ImageButton bk;
-    Button update,clear;
+    ImageView bk;
+    Button update;
     String productCodeText,productNameText;
     String productPriceText,productDiscountText;
     Intent intent;
@@ -178,7 +179,6 @@ public class UpdateProduct extends AppCompatActivity {
         productPrice=findViewById(R.id.product_price);
         spinner=findViewById(R.id.discount);
         update=findViewById(R.id.update);
-        clear=findViewById(R.id.clear);
         bk=findViewById(R.id.backButton);
     }
 }

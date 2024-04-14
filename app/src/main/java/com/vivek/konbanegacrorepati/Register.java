@@ -4,6 +4,8 @@ import static androidx.constraintlayout.helper.widget.MotionEffect.TAG;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -15,6 +17,8 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
+import com.google.android.material.textfield.TextInputLayout;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -23,9 +27,9 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class Register extends AppCompatActivity {
 
-    RadioGroup rgGender ;
-    RadioButton rbMale,rbFemale,rbOther;
-    Button submit ;
+
+
+    Button submit ,back;
     ImageButton backButton;
     EditText firstName,lastName,mobileNumber,email,age,password;
     String TfirstName,TlastName,TmobileNumber,Temail,Tage,Tpassword,Tgender;
@@ -37,26 +41,8 @@ public class Register extends AppCompatActivity {
         setContentView(R.layout.activity_register);
        findid();
 
-        rgGender.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(RadioGroup group, int checkedId) {
-                // Check which radio button was clicked
-                if (checkedId == R.id.Male) {
-                    Tgender="male";
-                } else if (checkedId == R.id.Female) {
-                    Tgender="female";
-                } else if (checkedId == R.id.Other) {
-                    Tgender="other";
-                }
-            }
-        });
-        backButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(Register.this,MainActivity.class));
-                finish();
-            }
-        });
+
+
 
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -65,10 +51,18 @@ public class Register extends AppCompatActivity {
 
                 if(validateInputs()){
                     saveDetails();
+                    showDetailsSavedDialog();
 
                 }
                 }
             });
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                finish();
+            }
+        });
 
 
     }
@@ -80,22 +74,32 @@ public class Register extends AppCompatActivity {
         Temail=email.getText().toString();
         Tage=age.getText().toString();
         Tpassword=password.getText().toString();
+
     }
 
     private void findid() {
-        rgGender = findViewById(R.id.Gender);
-        rbMale = findViewById(R.id.Male);
-        rbFemale = findViewById(R.id.Female);
-        rbOther = findViewById(R.id.Other);
-        firstName=findViewById(R.id.firstName);
-        lastName=findViewById(R.id.lastName);
-        mobileNumber=findViewById(R.id.mobileNumber);
-        email=findViewById(R.id.email);
-        age=findViewById(R.id.age);
-        password=findViewById(R.id.password);
-        submit=findViewById(R.id.Submit);
-        backButton=findViewById(R.id.backButton);
+        TextInputLayout firstNameLayout = findViewById(R.id.TLay);
+        TextInputLayout lastNameLayout = findViewById(R.id.TLay1);
+        TextInputLayout mobileNumberLayout = findViewById(R.id.TLay4);
+        TextInputLayout ageLayout = findViewById(R.id.TLay3new);
+        TextInputLayout emailLayout = findViewById(R.id.TLayEmail);
+        TextInputLayout passwordLayout = findViewById(R.id.passwordI);
+
+        // Find EditText fields inside TextInputLayouts
+        firstName = firstNameLayout.findViewById(R.id.firstName);
+        lastName = lastNameLayout.findViewById(R.id.lastName);
+        mobileNumber = mobileNumberLayout.findViewById(R.id.mobileNumber);
+        age = ageLayout.findViewById(R.id.age);
+        email = emailLayout.findViewById(R.id.email);
+        password = passwordLayout.findViewById(R.id.password);
+
+        submit = findViewById(R.id.Submit);
+            back = findViewById(R.id.back); // Assuming backButton is an ImageButton
+
+
     }
+
+
     private boolean validateInputs() {
         // Validate First Name
         String firstNameText = firstName.getText().toString().trim();
@@ -154,11 +158,7 @@ public class Register extends AppCompatActivity {
         // Add more validations for password (e.g., minimum length, strength) as needed
 
         // Check Gender selection
-        if (rgGender.getCheckedRadioButtonId() == -1) {
-            // No radio button is checked
-            Toast.makeText(getApplicationContext(), "Please select a gender", Toast.LENGTH_SHORT).show();
-            return false;
-        }
+
 
         // All validations passed
         return true;
@@ -210,6 +210,20 @@ public class Register extends AppCompatActivity {
                 Log.d(TAG, errorMessage);
             }
         });
+    }
+    private void showDetailsSavedDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(Register.this);
+        builder.setTitle("Details Saved")
+                .setMessage("Details saved successfully.")
+                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                        startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                    }
+                });
+        AlertDialog dialog = builder.create();
+        dialog.show();
     }
     
 }

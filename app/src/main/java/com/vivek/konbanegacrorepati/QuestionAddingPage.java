@@ -2,12 +2,16 @@ package com.vivek.konbanegacrorepati;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
@@ -25,7 +29,7 @@ public class QuestionAddingPage extends AppCompatActivity {
     EditText question;
     RadioGroup option;
     RadioButton optionA,optionB,optionC,optionD,optionE;
-    ImageButton backButton;
+    ImageView backButton;
 
     EditText optionA_txt,optionB_txt,optionC_txt,optionD_txt,optionE_txt;
     RadioGroup complexity;
@@ -116,171 +120,167 @@ public class QuestionAddingPage extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                gettext();
+                if (validateFields()) {
+                    // If all fields are filled, proceed with API call
+                    gettext();
+                    Retrofit retrofit=new Retrofit.Builder()
+                            .baseUrl("http://"+IpAddress.ipAddress+"/php%20api/KBC/")
+                            .addConverterFactory(GsonConverterFactory.create())
+                            .build();
 
-                Retrofit retrofit=new Retrofit.Builder()
-                        .baseUrl("http://"+IpAddress.ipAddress+"/php%20api/KBC/")
-                        .addConverterFactory(GsonConverterFactory.create())
-                        .build();
+                    ApiService apiService=retrofit.create(ApiService.class);
 
-                ApiService apiService=retrofit.create(ApiService.class);
+                    if(t_complexity==1){
+                        Call<ResponseAdmin> complexity1=apiService.Complexity1
+                                (t_question,t_optionA,t_optionB
+                                        ,t_optionC,t_optionD,t_optionE,t_correctAns,t_time);
+                        complexity1.enqueue(new Callback<ResponseAdmin>() {
+                            @Override
+                            public void onResponse(Call<ResponseAdmin> call, Response<ResponseAdmin> response) {
+                                ResponseAdmin responseRegistration=response.body();
+                                String success=responseRegistration.getSuccess();
+                                String message= responseRegistration.getMessage();
 
-                if(t_complexity==1){
-                    Call<ResponseAdmin> complexity1=apiService.Complexity1
-                            (t_question,t_optionA,t_optionB
-                                    ,t_optionC,t_optionD,t_optionE,t_correctAns,t_time);
-                    complexity1.enqueue(new Callback<ResponseAdmin>() {
-                        @Override
-                        public void onResponse(Call<ResponseAdmin> call, Response<ResponseAdmin> response) {
-                            ResponseAdmin responseRegistration=response.body();
-                            String success=responseRegistration.getSuccess();
-                            String message= responseRegistration.getMessage();
-
-                            Toast.makeText(getApplicationContext(),"success : "+success+"message  :"+message
-                                    ,Toast.LENGTH_SHORT).show();
-                        }
-
-                        @Override
-                        public void onFailure(Call<ResponseAdmin> call, Throwable t) {
-
-                            String errorMessage = t.getMessage();
-
-                            // If the message is null, display a generic error message
-                            if (errorMessage == null) {
-                                errorMessage = "Request failed";
+                                showSuccessDialog();
                             }
 
-                            // Display the error message in a Toast
-                            Toast.makeText(getApplicationContext(), "Failed: " + errorMessage, Toast.LENGTH_SHORT).show();
+                            @Override
+                            public void onFailure(Call<ResponseAdmin> call, Throwable t) {
 
-                        }
-                    });
-                }
+                                String errorMessage = t.getMessage();
 
-                else if(t_complexity==2){
-                    Call<ResponseAdmin> complexity2=apiService.Complexity2
-                            (t_question,t_optionA,t_optionB
-                                    ,t_optionC,t_optionD,t_optionE,t_correctAns,t_time);
-                    complexity2.enqueue(new Callback<ResponseAdmin>() {
-                        @Override
-                        public void onResponse(Call<ResponseAdmin> call, Response<ResponseAdmin> response) {
-                            ResponseAdmin responseRegistration=response.body();
-                            String success=responseRegistration.getSuccess();
-                            String message= responseRegistration.getMessage();
+                                // If the message is null, display a generic error message
+                                if (errorMessage == null) {
+                                    errorMessage = "Request failed";
+                                }
 
-                            Toast.makeText(getApplicationContext(),"success : "+success+"message  :"+message
-                                    ,Toast.LENGTH_SHORT).show();
-                        }
+                                // Display the error message in a Toast
+                                Toast.makeText(getApplicationContext(), "Failed: " + errorMessage, Toast.LENGTH_SHORT).show();
 
-                        @Override
-                        public void onFailure(Call<ResponseAdmin> call, Throwable t) {
+                            }
+                        });
+                    }
 
-                            String errorMessage = t.getMessage();
+                    else if(t_complexity==2){
+                        Call<ResponseAdmin> complexity2=apiService.Complexity2
+                                (t_question,t_optionA,t_optionB
+                                        ,t_optionC,t_optionD,t_optionE,t_correctAns,t_time);
+                        complexity2.enqueue(new Callback<ResponseAdmin>() {
+                            @Override
+                            public void onResponse(Call<ResponseAdmin> call, Response<ResponseAdmin> response) {
+                                ResponseAdmin responseRegistration=response.body();
+                                String success=responseRegistration.getSuccess();
+                                String message= responseRegistration.getMessage();
 
-                            // If the message is null, display a generic error message
-                            if (errorMessage == null) {
-                                errorMessage = "Request failed";
+                                showSuccessDialog();
                             }
 
-                            // Display the error message in a Toast
-                            Toast.makeText(getApplicationContext(), "Failed: " + errorMessage, Toast.LENGTH_SHORT).show();
+                            @Override
+                            public void onFailure(Call<ResponseAdmin> call, Throwable t) {
 
-                        }
-                    });
-                }
-                else if(t_complexity==3){
-                    Call<ResponseAdmin> complexity3=apiService.Complexity3
-                            (t_question,t_optionA,t_optionB
-                                    ,t_optionC,t_optionD,t_optionE,t_correctAns,t_time);
-                    complexity3.enqueue(new Callback<ResponseAdmin>() {
-                        @Override
-                        public void onResponse(Call<ResponseAdmin> call, Response<ResponseAdmin> response) {
-                            ResponseAdmin responseRegistration=response.body();
-                            String success=responseRegistration.getSuccess();
-                            String message= responseRegistration.getMessage();
+                                String errorMessage = t.getMessage();
 
-                            Toast.makeText(getApplicationContext(),"success : "+success+"message  :"+message
-                                    ,Toast.LENGTH_SHORT).show();
-                        }
+                                // If the message is null, display a generic error message
+                                if (errorMessage == null) {
+                                    errorMessage = "Request failed";
+                                }
 
-                        @Override
-                        public void onFailure(Call<ResponseAdmin> call, Throwable t) {
+                                // Display the error message in a Toast
+                                Toast.makeText(getApplicationContext(), "Failed: " + errorMessage, Toast.LENGTH_SHORT).show();
 
-                            String errorMessage = t.getMessage();
+                            }
+                        });
+                    }
+                    else if(t_complexity==3){
+                        Call<ResponseAdmin> complexity3=apiService.Complexity3
+                                (t_question,t_optionA,t_optionB
+                                        ,t_optionC,t_optionD,t_optionE,t_correctAns,t_time);
+                        complexity3.enqueue(new Callback<ResponseAdmin>() {
+                            @Override
+                            public void onResponse(Call<ResponseAdmin> call, Response<ResponseAdmin> response) {
+                                ResponseAdmin responseRegistration=response.body();
+                                String success=responseRegistration.getSuccess();
+                                String message= responseRegistration.getMessage();
 
-                            // If the message is null, display a generic error message
-                            if (errorMessage == null) {
-                                errorMessage = "Request failed";
+                                showSuccessDialog();
                             }
 
-                            // Display the error message in a Toast
-                            Toast.makeText(getApplicationContext(), "Failed: " + errorMessage, Toast.LENGTH_SHORT).show();
+                            @Override
+                            public void onFailure(Call<ResponseAdmin> call, Throwable t) {
 
-                        }
-                    });
-                }
-                else if(t_complexity==4){
-                    Call<ResponseAdmin> complexity4=apiService.Complexity4
-                            (t_question,t_optionA,t_optionB
-                                    ,t_optionC,t_optionD,t_optionE,t_correctAns,t_time);
-                    complexity4.enqueue(new Callback<ResponseAdmin>() {
-                        @Override
-                        public void onResponse(Call<ResponseAdmin> call, Response<ResponseAdmin> response) {
-                            ResponseAdmin responseRegistration=response.body();
-                            String success=responseRegistration.getSuccess();
-                            String message= responseRegistration.getMessage();
+                                String errorMessage = t.getMessage();
 
-                            Toast.makeText(getApplicationContext(),"success : "+success+"message  :"+message
-                                    ,Toast.LENGTH_SHORT).show();
-                        }
+                                // If the message is null, display a generic error message
+                                if (errorMessage == null) {
+                                    errorMessage = "Request failed";
+                                }
 
-                        @Override
-                        public void onFailure(Call<ResponseAdmin> call, Throwable t) {
+                                // Display the error message in a Toast
+                                Toast.makeText(getApplicationContext(), "Failed: " + errorMessage, Toast.LENGTH_SHORT).show();
 
-                            String errorMessage = t.getMessage();
+                            }
+                        });
+                    }
+                    else if(t_complexity==4){
+                        Call<ResponseAdmin> complexity4=apiService.Complexity4
+                                (t_question,t_optionA,t_optionB
+                                        ,t_optionC,t_optionD,t_optionE,t_correctAns,t_time);
+                        complexity4.enqueue(new Callback<ResponseAdmin>() {
+                            @Override
+                            public void onResponse(Call<ResponseAdmin> call, Response<ResponseAdmin> response) {
+                                ResponseAdmin responseRegistration=response.body();
+                                String success=responseRegistration.getSuccess();
+                                String message= responseRegistration.getMessage();
 
-                            // If the message is null, display a generic error message
-                            if (errorMessage == null) {
-                                errorMessage = "Request failed";
+                                showSuccessDialog();
                             }
 
-                            // Display the error message in a Toast
-                            Toast.makeText(getApplicationContext(), "Failed: " + errorMessage, Toast.LENGTH_SHORT).show();
+                            @Override
+                            public void onFailure(Call<ResponseAdmin> call, Throwable t) {
 
-                        }
-                    });
-                }
-                else if(t_complexity==5){
-                    Call<ResponseAdmin> complexity5=apiService.Complexity5
-                            (t_question,t_optionA,t_optionB
-                                    ,t_optionC,t_optionD,t_optionE,t_correctAns,t_time);
-                    complexity5.enqueue(new Callback<ResponseAdmin>() {
-                        @Override
-                        public void onResponse(Call<ResponseAdmin> call, Response<ResponseAdmin> response) {
-                            ResponseAdmin responseRegistration=response.body();
-                            String success=responseRegistration.getSuccess();
-                            String message= responseRegistration.getMessage();
+                                String errorMessage = t.getMessage();
 
-                            Toast.makeText(getApplicationContext(),"success : "+success+"message  :"+message
-                                    ,Toast.LENGTH_SHORT).show();
-                        }
+                                // If the message is null, display a generic error message
+                                if (errorMessage == null) {
+                                    errorMessage = "Request failed";
+                                }
 
-                        @Override
-                        public void onFailure(Call<ResponseAdmin> call, Throwable t) {
+                                // Display the error message in a Toast
+                                Toast.makeText(getApplicationContext(), "Failed: " + errorMessage, Toast.LENGTH_SHORT).show();
 
-                            String errorMessage = t.getMessage();
+                            }
+                        });
+                    }
+                    else if(t_complexity==5){
+                        Call<ResponseAdmin> complexity5=apiService.Complexity5
+                                (t_question,t_optionA,t_optionB
+                                        ,t_optionC,t_optionD,t_optionE,t_correctAns,t_time);
+                        complexity5.enqueue(new Callback<ResponseAdmin>() {
+                            @Override
+                            public void onResponse(Call<ResponseAdmin> call, Response<ResponseAdmin> response) {
+                                ResponseAdmin responseRegistration=response.body();
+                                String success=responseRegistration.getSuccess();
+                                String message= responseRegistration.getMessage();
 
-                            // If the message is null, display a generic error message
-                            if (errorMessage == null) {
-                                errorMessage = "Request failed";
+                                showSuccessDialog();
                             }
 
-                            // Display the error message in a Toast
-                            Toast.makeText(getApplicationContext(), "Failed: " + errorMessage, Toast.LENGTH_SHORT).show();
+                            @Override
+                            public void onFailure(Call<ResponseAdmin> call, Throwable t) {
 
-                        }
-                    });
-                }
+                                String errorMessage = t.getMessage();
+
+                                // If the message is null, display a generic error message
+                                if (errorMessage == null) {
+                                    errorMessage = "Request failed";
+                                }
+
+                                // Display the error message in a Toast
+                                Toast.makeText(getApplicationContext(), "Failed: " + errorMessage, Toast.LENGTH_SHORT).show();
+
+                            }
+                        });
+                    }
                 /*Call<ResponseAdmin> admin=apiService.Admin
                         (t_question,t_optionA,t_optionB
                                 ,t_optionC,t_optionD,t_optionE,t_correctAns,t_complexity,t_time);
@@ -311,6 +311,11 @@ public class QuestionAddingPage extends AppCompatActivity {
                     }
                 });
                 */
+                } else {
+                    showMandatoryFieldsDialog();
+                    // If any field is empty, show a toast message
+                }
+
             }
         });
 
@@ -373,4 +378,45 @@ public class QuestionAddingPage extends AppCompatActivity {
         backButton=findViewById(R.id.backButton);
         //product=findViewById(R.id.product);
     }
+    private void showMandatoryFieldsDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Mandatory Fields")
+                .setMessage("Please fill in all fields before submitting.")
+                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+        AlertDialog dialog = builder.create();
+        dialog.show();
+    }
+    private boolean validateFields() {
+        if (TextUtils.isEmpty(question.getText().toString()) ||
+                TextUtils.isEmpty(optionA_txt.getText().toString()) ||
+                TextUtils.isEmpty(optionB_txt.getText().toString()) ||
+                TextUtils.isEmpty(optionC_txt.getText().toString()) ||
+                TextUtils.isEmpty(optionD_txt.getText().toString()) ||
+                TextUtils.isEmpty(optionE_txt.getText().toString()) ||
+                option.getCheckedRadioButtonId() == -1 ||
+                complexity.getCheckedRadioButtonId() == -1 ||
+                TextUtils.isEmpty(time.getText().toString())) {
+            return false; // Return false if any field is empty
+        }
+        return true; // Return true if all fields are filled
+    }
+    private void showSuccessDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Success")
+                .setMessage("Question recorded successfully.")
+                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+        AlertDialog dialog = builder.create();
+        dialog.show();
+    }
+
 }
